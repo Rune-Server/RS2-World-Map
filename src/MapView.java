@@ -74,7 +74,7 @@ public class MapView extends EventHandler {
 		}
 		try {
 			for (int i2 = 0; i2 < 100; i2++)
-				abi[i2] = new g(o1, "mapfunction", i2);
+				abi[i2] = new Sprite(o1, "mapfunction", i2);
 
 		} catch (Exception _ex) {
 		}
@@ -89,11 +89,11 @@ public class MapView extends EventHandler {
 		acd = new f(30, true, this);
 		abb = new int[aal][aam];
 		aag(abyte1, abb);
-		adn = new g(adj, adi);
+		adn = new Sprite(adj, adi);
 		adn.acf();
 		aan(0, 0, aal, aam, 0, 0, adj, adi);
-		e.aji(0, 0, adj, adi, 0);
-		e.aji(1, 1, adj - 2, adi - 2, aab);
+		DrawingArea.aji(0, 0, adj, adi, 0);
+		DrawingArea.aji(1, 1, adj - 2, adi - 2, aab);
 		super.ajb.acm();
 	}
 
@@ -283,7 +283,7 @@ public class MapView extends EventHandler {
 		return k1;
 	}
 
-	public final void ahb() {
+	public final void reset() {
 		try {
 			aan = null;
 			aba = null;
@@ -307,7 +307,7 @@ public class MapView extends EventHandler {
 			aei = null;
 			aej = null;
 			aek = null;
-			afb = null;
+			shopList = null;
 			System.gc();
 			return;
 		} catch (Throwable _ex) {
@@ -335,19 +335,19 @@ public class MapView extends EventHandler {
 		for (int key = 1; key > 0;) {
 			key = agd();
 			if (key == 49) {
-				zoom = 3D;
+				currentZoom = 3D;
 				keyPressed = true;
 			}
 			if (key == 50) {
-				zoom = 4D;
+				currentZoom = 4D;
 				keyPressed = true;
 			}
 			if (key == 51) {
-				zoom = 6D;
+				currentZoom = 6D;
 				keyPressed = true;
 			}
 			if (key == 52) {
-				zoom = 8D;
+				currentZoom = 8D;
 				keyPressed = true;
 			}
 			if (key == 107 || key == Constants.K) {
@@ -360,7 +360,7 @@ public class MapView extends EventHandler {
 			}
 			if (super.ajd != null && key == 101) {
 				System.out.println("Starting export...");
-				g g1 = new g(aal * 2, aam * 2);
+				Sprite g1 = new Sprite(aal * 2, aam * 2);
 				g1.acf();
 				aan(0, 0, aal, aam, 0, 0, aal * 2, aam * 2);
 				super.ajb.acm();
@@ -395,22 +395,22 @@ public class MapView extends EventHandler {
 			aed = afa;
 			if (super.akb > 170 && super.akb < 220 && super.akc > 471
 					&& super.akc < 503) {
-				zoom = 3D;
+				currentZoom = 3D;
 				aea = -1;
 			}
 			if (super.akb > 230 && super.akb < 280 && super.akc > 471
 					&& super.akc < 503) {
-				zoom = 4D;
+				currentZoom = 4D;
 				aea = -1;
 			}
 			if (super.akb > 290 && super.akb < 340 && super.akc > 471
 					&& super.akc < 503) {
-				zoom = 6D;
+				currentZoom = 6D;
 				aea = -1;
 			}
 			if (super.akb > 350 && super.akb < 400 && super.akc > 471
 					&& super.akc < 503) {
-				zoom = 8D;
+				currentZoom = 8D;
 				aea = -1;
 			}
 			if (super.akb > acl && super.akc > acm + ada
@@ -442,7 +442,7 @@ public class MapView extends EventHandler {
 			if (super.aji > acl && super.aji < acl + acn) {
 				int i1 = acm + 21 + 5;
 				for (int i2 = 0; i2 < 25; i2++)
-					if (i2 + adb >= afb.length || !afb[i2 + adb].equals("???")) {
+					if (i2 + adb >= shopList.length || !shopList[i2 + adb].equals("???")) {
 						if (super.ajj >= i1 && super.ajj < i1 + 17) {
 							ade = i2 + adb;
 							if (super.aka == 1) {
@@ -474,21 +474,21 @@ public class MapView extends EventHandler {
 			}
 		}
 		if (super.ajh == 1 && aea != -1) {
-			aen = aec + (int) (((double) (aea - super.aji) * 2D) / zoom);
-			afa = aed + (int) (((double) (aeb - super.ajj) * 2D) / zoom);
+			aen = aec + (int) (((double) (aea - super.aji) * 2D) / currentZoom);
+			afa = aed + (int) (((double) (aeb - super.ajj) * 2D) / currentZoom);
 			keyPressed = true;
 		}
-		if (ael < zoom) {
+		if (ael < currentZoom) {
 			keyPressed = true;
 			ael += ael / 30D;
-			if (ael > zoom)
-				ael = zoom;
+			if (ael > currentZoom)
+				ael = currentZoom;
 		}
-		if (ael > zoom) {
+		if (ael > currentZoom) {
 			keyPressed = true;
 			ael -= ael / 30D;
-			if (ael < zoom)
-				ael = zoom;
+			if (ael < currentZoom)
+				ael = currentZoom;
 		}
 		if (adb < adc) {
 			keyPressed = true;
@@ -520,7 +520,7 @@ public class MapView extends EventHandler {
 		if (keyPressed) {
 			keyPressed = false;
 			aai = 0;
-			e.ajm();
+			DrawingArea.ajm();
 			int k = aen - (int) (635D / ael);
 			int i1 = afa - (int) (503D / ael);
 			int j1 = aen + (int) (635D / ael);
@@ -528,10 +528,10 @@ public class MapView extends EventHandler {
 			aan(k, i1, j1, k1, 0, 0, 635, 503);
 			if (showMapInterface) {
 				adn.ack(adk, adl);
-				e.ajh(adk + (adj * k) / aal, adl + (adi * i1) / aam,
+				DrawingArea.ajh(adk + (adj * k) / aal, adl + (adi * i1) / aam,
 						((j1 - k) * adj) / aal, ((k1 - i1) * adi) / aam,
 						0xff0000, 128);
-				e.aji(adk + (adj * k) / aal, adl + (adi * i1) / aam,
+				DrawingArea.aji(adk + (adj * k) / aal, adl + (adi * i1) / aam,
 						((j1 - k) * adj) / aal, ((k1 - i1) * adi) / aam,
 						0xff0000);
 				if (adh > 0 && adh % 10 < 5) {
@@ -539,7 +539,7 @@ public class MapView extends EventHandler {
 						if (ack[l1] == adg) {
 							int j2 = adk + (adj * aci[l1]) / aal;
 							int l2 = adl + (adi * acj[l1]) / aam;
-							e.ajn(j2, l2, 2, 0xffff00, 256);
+							DrawingArea.ajn(j2, l2, 2, 0xffff00, 256);
 						}
 
 				}
@@ -553,17 +553,17 @@ public class MapView extends EventHandler {
 						0x555555, "Next page");
 				int i2 = acm + 3 + 18;
 				for (int k2 = 0; k2 < 25; k2++) {
-					if (k2 + adb < abi.length && k2 + adb < afb.length) {
-						if (afb[k2 + adb].equals("???"))
+					if (k2 + adb < abi.length && k2 + adb < shopList.length) {
+						if (shopList[k2 + adb].equals("???"))
 							continue;
 						abi[k2 + adb].acg(acl + 3, i2);
-						abj.adn(afb[k2 + adb], acl + 21, i2 + 14, 0);
+						abj.adn(shopList[k2 + adb], acl + 21, i2 + 14, 0);
 						int i3 = 0xffffff;
 						if (ade == k2 + adb)
 							i3 = 0xbbaaaa;
 						if (adh > 0 && adh % 10 < 5 && adg == k2 + adb)
 							i3 = 0xffff00;
-						abj.adn(afb[k2 + adb], acl + 20, i2 + 13, i3);
+						abj.adn(shopList[k2 + adb], acl + 20, i2 + 13, i3);
 					}
 					i2 += 17;
 				}
@@ -571,19 +571,19 @@ public class MapView extends EventHandler {
 			}
 			aam(adk, adl + adi, adj, 18, aab, aac, aad, "Overview");
 			aam(acl, acm + ada, acn, 18, aab, aac, aad, "Key");
-			if (zoom == 3D)
+			if (currentZoom == 3D)
 				aam(170, 471, 50, 30, aae, aaf, aag, "37%");
 			else
 				aam(170, 471, 50, 30, aab, aac, aad, "37%");
-			if (zoom == 4D)
+			if (currentZoom == 4D)
 				aam(230, 471, 50, 30, aae, aaf, aag, "50%");
 			else
 				aam(230, 471, 50, 30, aab, aac, aad, "50%");
-			if (zoom == 6D)
+			if (currentZoom == 6D)
 				aam(290, 471, 50, 30, aae, aaf, aag, "75%");
 			else
 				aam(290, 471, 50, 30, aab, aac, aad, "75%");
-			if (zoom == 8D)
+			if (currentZoom == 8D)
 				aam(350, 471, 50, 30, aae, aaf, aag, "100%");
 			else
 				aam(350, 471, 50, 30, aab, aac, aad, "100%");
@@ -601,16 +601,16 @@ public class MapView extends EventHandler {
 
 	private final void aam(int arg0, int arg1, int arg2, int arg3, int arg4,
 			int arg5, int arg6, String arg7) {
-		e.aji(arg0, arg1, arg2, arg3, 0);
+		DrawingArea.aji(arg0, arg1, arg2, arg3, 0);
 		arg0++;
 		arg1++;
 		arg2 -= 2;
 		arg3 -= 2;
-		e.ajl(arg0, arg1, arg2, arg3, arg5);
-		e.ajd(arg0, arg1, arg2, arg4);
-		e.aje(arg0, arg1, arg3, arg4);
-		e.ajd(arg0, (arg1 + arg3) - 1, arg2, arg6);
-		e.aje((arg0 + arg2) - 1, arg1, arg3, arg6);
+		DrawingArea.ajl(arg0, arg1, arg2, arg3, arg5);
+		DrawingArea.ajd(arg0, arg1, arg2, arg4);
+		DrawingArea.aje(arg0, arg1, arg3, arg4);
+		DrawingArea.ajd(arg0, (arg1 + arg3) - 1, arg2, arg6);
+		DrawingArea.aje((arg0 + arg2) - 1, arg1, arg3, arg6);
 		abj.aec(arg7, arg0 + arg2 / 2 + 1, arg1 + arg3 / 2 + 1 + 4, 0);
 		abj.aec(arg7, arg0 + arg2 / 2, arg1 + arg3 / 2 + 4, 0xffffff);
 	}
@@ -640,14 +640,14 @@ public class MapView extends EventHandler {
 						k7 += arg5;
 						int k9 = ai1[i6 + arg1];
 						if (k9 == 0) {
-							e.ajl(i2, l6, k2 - i2, k7 - l6, ai[i6 + arg1]);
+							DrawingArea.ajl(i2, l6, k2 - i2, k7 - l6, ai[i6 + arg1]);
 						} else {
 							byte byte0 = abyte0[i6 + arg1];
 							int k10 = byte0 & 0xfc;
 							if (k10 == 0 || i3 <= 1 || k8 <= 1)
-								e.ajl(i2, l6, i3, k8, k9);
+								DrawingArea.ajl(i2, l6, i3, k8, k9);
 							else
-								aba(e.bbe, l6 * e.bbf + i2, ai[i6 + arg1], k9,
+								aba(DrawingArea.bbe, l6 * DrawingArea.bbf + i2, ai[i6 + arg1], k9,
 										i3, k8, k10 >> 2, byte0 & 3);
 						}
 					}
@@ -692,40 +692,40 @@ public class MapView extends EventHandler {
 								l10 -= 4;
 							}
 							if (l10 == 1)
-								e.aje(j3, l8, j10, l12);
+								DrawingArea.aje(j3, l8, j10, l12);
 							else if (l10 == 2)
-								e.ajd(j3, l8, l4, l12);
+								DrawingArea.ajd(j3, l8, l4, l12);
 							else if (l10 == 3)
-								e.aje(j11, l8, j10, l12);
+								DrawingArea.aje(j11, l8, j10, l12);
 							else if (l10 == 4)
-								e.ajd(j3, i12, l4, l12);
+								DrawingArea.ajd(j3, i12, l4, l12);
 							else if (l10 == 9) {
-								e.aje(j3, l8, j10, 0xffffff);
-								e.ajd(j3, l8, l4, l12);
+								DrawingArea.aje(j3, l8, j10, 0xffffff);
+								DrawingArea.ajd(j3, l8, l4, l12);
 							} else if (l10 == 10) {
-								e.aje(j11, l8, j10, 0xffffff);
-								e.ajd(j3, l8, l4, l12);
+								DrawingArea.aje(j11, l8, j10, 0xffffff);
+								DrawingArea.ajd(j3, l8, l4, l12);
 							} else if (l10 == 11) {
-								e.aje(j11, l8, j10, 0xffffff);
-								e.ajd(j3, i12, l4, l12);
+								DrawingArea.aje(j11, l8, j10, 0xffffff);
+								DrawingArea.ajd(j3, i12, l4, l12);
 							} else if (l10 == 12) {
-								e.aje(j3, l8, j10, 0xffffff);
-								e.ajd(j3, i12, l4, l12);
+								DrawingArea.aje(j3, l8, j10, 0xffffff);
+								DrawingArea.ajd(j3, i12, l4, l12);
 							} else if (l10 == 17)
-								e.ajd(j3, l8, 1, l12);
+								DrawingArea.ajd(j3, l8, 1, l12);
 							else if (l10 == 18)
-								e.ajd(j11, l8, 1, l12);
+								DrawingArea.ajd(j11, l8, 1, l12);
 							else if (l10 == 19)
-								e.ajd(j11, i12, 1, l12);
+								DrawingArea.ajd(j11, i12, 1, l12);
 							else if (l10 == 20)
-								e.ajd(j3, i12, 1, l12);
+								DrawingArea.ajd(j3, i12, 1, l12);
 							else if (l10 == 25) {
 								for (int i13 = 0; i13 < j10; i13++)
-									e.ajd(j3 + i13, i12 - i13, 1, l12);
+									DrawingArea.ajd(j3 + i13, i12 - i13, 1, l12);
 
 							} else if (l10 == 26) {
 								for (int j13 = 0; j13 < j10; j13++)
-									e.ajd(j3 + j13, l8 + j13, 1, l12);
+									DrawingArea.ajd(j3 + j13, l8 + j13, 1, l12);
 
 							}
 						}
@@ -755,13 +755,13 @@ public class MapView extends EventHandler {
 				if (acg[i4] == adg) {
 					abi[acg[i4]].acg(ace[i4] - 7, acf[i4] - 7);
 					if (adh % 10 < 5) {
-						e.ajn(ace[i4], acf[i4], 15, 0xffff00, 128);
-						e.ajn(ace[i4], acf[i4], 7, 0xffffff, 256);
+						DrawingArea.ajn(ace[i4], acf[i4], 15, 0xffff00, 128);
+						DrawingArea.ajn(ace[i4], acf[i4], 7, 0xffffff, 256);
 					}
 				}
 
 		}
-		if (ael == zoom && aee) {
+		if (ael == currentZoom && aee) {
 			for (int j4 = 0; j4 < aef; j4++) {
 				int i5 = aei[j4];
 				int k5 = aej[j4];
@@ -842,7 +842,7 @@ public class MapView extends EventHandler {
 							/ (arg2 - arg0);
 					int i10 = arg5 + ((arg7 - arg5) * (k6 - arg1))
 							/ (arg3 - arg1);
-					e.aji(j7, j8, j9 - j7, i10 - j8, 0xffffff);
+					DrawingArea.aji(j7, j8, j9 - j7, i10 - j8, 0xffffff);
 					abj.aeb(k4 + "_" + j5, j9 - 5, i10 - 5, 0xffffff);
 					if (k4 == 33 && j5 >= 71 && j5 <= 73)
 						abj.aec("u_pass", (j9 + j7) / 2, (i10 + j8) / 2,
@@ -859,7 +859,7 @@ public class MapView extends EventHandler {
 
 	private final void aba(int arg0[], int arg1, int arg2, int arg3, int arg4,
 			int arg5, int arg6, int arg7) {
-		int k = e.bbf - arg4;
+		int k = DrawingArea.bbf - arg4;
 		if (arg6 == 9) {
 			arg6 = 1;
 			arg7 = arg7 + 1 & 3;
@@ -1443,7 +1443,7 @@ public class MapView extends EventHandler {
 		aag = 0x880000;
 		keyPressed = true;
 		abh = new h[100];
-		abi = new g[100];
+		abi = new Sprite[100];
 		ace = new int[2000];
 		acf = new int[2000];
 		acg = new int[2000];
@@ -1465,7 +1465,7 @@ public class MapView extends EventHandler {
 		aej = new int[aeg];
 		aek = new int[aeg];
 		ael = 4D;
-		zoom = 4D;
+		currentZoom = 4D;
 	}
 
 	private static boolean aaa;
@@ -1490,7 +1490,7 @@ public class MapView extends EventHandler {
 	private byte abf[][];
 	private byte abg[][];
 	private h abh[];
-	private g abi[];
+	private Sprite abi[];
 	private i abj;
 	private f abk;
 	private f abl;
@@ -1523,7 +1523,7 @@ public class MapView extends EventHandler {
 	private int adk;
 	private int adl;
 	private boolean showMapInterface;
-	private g adn;
+	private Sprite adn;
 	private int aea;
 	private int aeb;
 	private int aec;
@@ -1536,10 +1536,10 @@ public class MapView extends EventHandler {
 	private int aej[];
 	private int aek[];
 	private double ael;
-	private double zoom;
+	private double currentZoom;
 	private static int aen;
 	private static int afa;
-	private String afb[] = { "General Store", "Sword Shop", "Magic Shop",
+	private String shopList[] = { "General Store", "Sword Shop", "Magic Shop",
 			"Axe Shop", "Helmet Shop", "Bank", "Quest Start", "Amulet Shop",
 			"Mining Site", "Furnace", "Anvil", "Combat Training", "Dungeon",
 			"Staff Shop", "Platebody Shop", "Platelegs Shop", "Scimitar Shop",
@@ -1553,5 +1553,4 @@ public class MapView extends EventHandler {
 			"Fur Trader", "Spice Shop", "Agility Training", "Vegetable Store",
 			"Slayer Master", "Hair Dressers", "Farming patch", "Makeover Mage",
 			"Guide", "Transportation", "???", "Farming shop", "Loom", "Brewery" };
-
 }

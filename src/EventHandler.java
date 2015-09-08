@@ -166,7 +166,7 @@ public class EventHandler extends Applet implements Runnable, MouseListener,
 		ain = height;
 		ajd = new Window(this, aim, ain);
 		aja = agf().getGraphics();
-		ajb = new l(aim, ain, agf());
+		ajb = new RSImageProducer(aim, ain, agf());
 		aff(this, 1);
 	}
 
@@ -231,7 +231,7 @@ public class EventHandler extends Applet implements Runnable, MouseListener,
 		aim = arg0;
 		ain = arg1;
 		aja = agf().getGraphics();
-		ajb = new l(aim, ain, agf());
+		ajb = new RSImageProducer(aim, ain, agf());
 		aff(this, 1);
 	}
 
@@ -280,7 +280,7 @@ public class EventHandler extends Applet implements Runnable, MouseListener,
 		aij = new long[10];
 		aik = 0;
 		ail = false;
-		ajc = new g[6];
+		ajc = new Sprite[6];
 		aje = true;
 		ajf = true;
 		ajg = 0;
@@ -457,8 +457,8 @@ public class EventHandler extends Applet implements Runnable, MouseListener,
 	public int aim;
 	public int ain;
 	public Graphics aja;
-	public l ajb;
-	public g ajc[];
+	public RSImageProducer ajb;
+	public Sprite ajc[];
 	public Window ajd;
 	public boolean aje;
 	public boolean ajf;
