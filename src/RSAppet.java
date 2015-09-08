@@ -71,10 +71,13 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 			keyIndex = 2;
 		}
 		if (keyCode == 38) {
+			System.out.println("38");
 			keyIndex = 3;
 		}
-		if (keyCode == 40)
+		if (keyCode == 40) {
+			System.out.println("40");
 			keyIndex = 4;
+		}
 		if (keyCode == 17)
 			keyIndex = 5;
 		if (keyCode == 8)
@@ -199,12 +202,13 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 			x -= 4;
 			y -= 22;
 		}
+		
 		System.out.println("Mouse X: " + x);
 		System.out.println("Mouse Y: " + y);
 		
 		ajg = 0;
-		mouseX = x;
-		mouseY = y;
+		localMouseX = x;
+		localMouseY = y;
 		ajn = System.currentTimeMillis();
 		if (mouse.isMetaDown()) {
 			ajk = 2;
@@ -253,9 +257,9 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 	public final void windowDeactivated(WindowEvent windowevent) {
 	}
 
-	public final void agn(Graphics arg0) {
+	public final void agn(Graphics g) {
 		if (graphics == null)
-			graphics = arg0;
+			graphics = g;
 		aje = true;
 		afb();
 	}
@@ -288,12 +292,12 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 		aji = 0;
 		ajj = 0;
 		ajk = 0;
-		mouseX = 0;
-		mouseY = 0;
+		localMouseX = 0;
+		localMouseY = 0;
 		ajn = 0L;
 		aka = 0;
-		akb = 0;
-		akc = 0;
+		mouseX = 0;
+		mouseY = 0;
 		akd = 0L;
 		ake = new int[128];
 		akf = new int[128];
@@ -403,8 +407,8 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 			}
 			for (; i1 < 256; i1 += j) {
 				aka = ajk;
-				akb = mouseX;
-				akc = mouseY;
+				mouseX = localMouseX;
+				mouseY = localMouseY;
 				akd = ajn;
 				ajk = 0;
 				ahd();
@@ -467,12 +471,12 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 	public int aji;
 	public int ajj;
 	public int ajk;
-	public int mouseX;
-	public int mouseY;
+	public int localMouseX;
+	public int localMouseY;
 	public long ajn;
 	public int aka;
-	public int akb;
-	public int akc;
+	public int mouseX;
+	public int mouseY;
 	public long akd;
 	public int ake[];
 	private int akf[];

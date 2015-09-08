@@ -32,10 +32,10 @@ public class MapView extends RSAppet {
 		aam = j1.aik();
 		aen = 3200 - aaj;
 		afa = (aak + aam) - 3200;
-		adi = 180;
-		adj = (aal * adi) / aam;
-		adk = 635 - adj - 5;
-		adl = 503 - adi - 20;
+		mapYOffset = 180;
+		mapXOffset = (aal * mapYOffset) / aam;
+		mapX = 635 - mapXOffset - 5;
+		mapY = 503 - mapYOffset - 20;
 		j1 = new j(o1.abl("labels.dat", null));
 		aef = j1.aik();
 		for (int k = 0; k < aef; k++) {
@@ -89,11 +89,11 @@ public class MapView extends RSAppet {
 		acd = new f(30, true, this);
 		abb = new int[aal][aam];
 		aag(abyte1, abb);
-		adn = new Sprite(adj, adi);
+		adn = new Sprite(mapXOffset, mapYOffset);
 		adn.acf();
-		aan(0, 0, aal, aam, 0, 0, adj, adi);
-		DrawingArea.aji(0, 0, adj, adi, 0);
-		DrawingArea.aji(1, 1, adj - 2, adi - 2, aab);
+		aan(0, 0, aal, aam, 0, 0, mapXOffset, mapYOffset);
+		DrawingArea.aji(0, 0, mapXOffset, mapYOffset, 0);
+		DrawingArea.aji(1, 1, mapXOffset - 2, mapYOffset - 2, aab);
 		super.fullScreen.initializeDrawingArea();
 	}
 
@@ -389,49 +389,56 @@ public class MapView extends RSAppet {
 		}
 
 		if (super.aka == 1) {
-			aea = super.akb;
-			aeb = super.akc;
+			aea = super.mouseX;
+			aeb = super.mouseY;
 			aec = aen;
 			aed = afa;
-			if (super.akb > 170 && super.akb < 220 && super.akc > 471
-					&& super.akc < 503) {
+			// zoom 37%
+			if (super.mouseX > 166 && super.mouseX < 215 && super.mouseY > 449
+					&& super.mouseY < 476) {				
 				currentZoom = 3D;
 				aea = -1;
+				
+				
+				
 			}
-			if (super.akb > 230 && super.akb < 280 && super.akc > 471
-					&& super.akc < 503) {
+			// zoom 50%
+			if (super.mouseX > 226 && super.mouseX < 274 && super.mouseY > 449
+					&& super.mouseY < 476) {
 				currentZoom = 4D;
 				aea = -1;
 			}
-			if (super.akb > 290 && super.akb < 340 && super.akc > 471
-					&& super.akc < 503) {
+			//zoom 75%
+			if (super.mouseX > 286 && super.mouseX < 335 && super.mouseY > 449
+					&& super.mouseY < 476) {
 				currentZoom = 6D;
 				aea = -1;
 			}
-			if (super.akb > 350 && super.akb < 400 && super.akc > 471
-					&& super.akc < 503) {
+			//zoom 100%
+			if (super.mouseX > 346 && super.mouseX < 395 && super.mouseY > 449
+					&& super.mouseY < 476) {
 				currentZoom = 8D;
 				aea = -1;
 			}
-			if (super.akb > acl && super.akc > acm + ada
-					&& super.akb < acl + acn && super.akc < 503) {
+			if (super.mouseX > keyX && super.mouseY > keyY + keyYOffset
+					&& super.mouseX < keyX + keyRX && super.mouseY < 477) {
 				showKeyInterface = !showKeyInterface;
 				aea = -1;
 			}
-			if (super.akb > adk && super.akc > adl + adi
-					&& super.akb < adk + adj && super.akc < 503) {
+			if (super.mouseX > mapX && super.mouseY > mapY + mapYOffset
+					&& super.mouseX < mapX + mapXOffset && super.mouseY < 477) {
 				showMapInterface = !showMapInterface;
 				aea = -1;
 			}
 			if (showKeyInterface) {
-				if (super.akb > acl && super.akc > acm && super.akb < acl + acn
-						&& super.akc < acm + ada)
+				if (super.mouseX > keyX && super.mouseY > keyY && super.mouseX < keyX + keyRX
+						&& super.mouseY < keyY + keyYOffset)
 					aea = -1;
-				if (super.akb > acl && super.akc > acm && super.akb < acl + acn
-						&& super.akc < acm + 18 && adc > 0)
+				if (super.mouseX > keyX && super.mouseY > keyY && super.mouseX < keyX + keyRX
+						&& super.mouseY < keyY + 18 && adc > 0)
 					adc -= 25;
-				if (super.akb > acl && super.akc > (acm + ada) - 18
-						&& super.akb < acl + acn && super.akc < acm + ada
+				if (super.mouseX > keyX && super.mouseY > (keyY + keyYOffset) - 18
+						&& super.mouseX < keyX + keyRX && super.mouseY < keyY + keyYOffset
 						&& adc < 50)
 					adc += 25;
 			}
@@ -439,8 +446,8 @@ public class MapView extends RSAppet {
 		}
 		if (showKeyInterface) {
 			ade = -1;
-			if (super.aji > acl && super.aji < acl + acn) {
-				int i1 = acm + 21 + 5;
+			if (super.aji > keyX && super.aji < keyX + keyRX) {
+				int i1 = keyY + 21 + 5;
 				for (int i2 = 0; i2 < 25; i2++)
 					if (i2 + adb >= shopList.length || !shopList[i2 + adb].equals("???")) {
 						if (super.ajj >= i1 && super.ajj < i1 + 17) {
@@ -460,15 +467,15 @@ public class MapView extends RSAppet {
 			}
 		}
 		if ((super.ajh == 1 || super.aka == 1) && showMapInterface) {
-			int j1 = super.akb;
-			int j2 = super.akc;
+			int x = super.mouseX;
+			int y = super.mouseY;
 			if (super.ajh == 1) {
-				j1 = super.aji;
-				j2 = super.ajj;
+				x = super.aji;
+				y = super.ajj;
 			}
-			if (j1 > adk && j2 > adl && j1 < adk + adj && j2 < adl + adi) {
-				aen = ((j1 - adk) * aal) / adj;
-				afa = ((j2 - adl) * aam) / adi;
+			if (x > mapX && y > mapY && x < mapX + mapXOffset && y < mapY + mapYOffset) {
+				aen = ((x - mapX) * aal) / mapXOffset;
+				afa = ((y - mapY) * aam) / mapYOffset;
 				aea = -1;
 				keyPressed = true;
 			}
@@ -527,50 +534,50 @@ public class MapView extends RSAppet {
 			int k1 = afa + (int) (503D / ael);
 			aan(k, i1, j1, k1, 0, 0, 635, 503);
 			if (showMapInterface) {
-				adn.ack(adk, adl);
-				DrawingArea.ajh(adk + (adj * k) / aal, adl + (adi * i1) / aam,
-						((j1 - k) * adj) / aal, ((k1 - i1) * adi) / aam,
+				adn.ack(mapX, mapY);
+				DrawingArea.ajh(mapX + (mapXOffset * k) / aal, mapY + (mapYOffset * i1) / aam,
+						((j1 - k) * mapXOffset) / aal, ((k1 - i1) * mapYOffset) / aam,
 						0xff0000, 128);
-				DrawingArea.aji(adk + (adj * k) / aal, adl + (adi * i1) / aam,
-						((j1 - k) * adj) / aal, ((k1 - i1) * adi) / aam,
+				DrawingArea.aji(mapX + (mapXOffset * k) / aal, mapY + (mapYOffset * i1) / aam,
+						((j1 - k) * mapXOffset) / aal, ((k1 - i1) * mapYOffset) / aam,
 						0xff0000);
 				if (adh > 0 && adh % 10 < 5) {
 					for (int l1 = 0; l1 < ach; l1++)
 						if (ack[l1] == adg) {
-							int j2 = adk + (adj * aci[l1]) / aal;
-							int l2 = adl + (adi * acj[l1]) / aam;
+							int j2 = mapX + (mapXOffset * aci[l1]) / aal;
+							int l2 = mapY + (mapYOffset * acj[l1]) / aam;
 							DrawingArea.ajn(j2, l2, 2, 0xffff00, 256);
 						}
 
 				}
 			}
 			if (showKeyInterface) {
-				aam(acl, acm, acn, 18, 0x999999, 0x777777, 0x555555,
+				aam(keyX, keyY, keyRX, 18, 0x999999, 0x777777, 0x555555,
 						"Prev page");
-				aam(acl, acm + 18, acn, ada - 36, 0x999999, 0x777777, 0x555555,
+				aam(keyX, keyY + 18, keyRX, keyYOffset - 36, 0x999999, 0x777777, 0x555555,
 						"");
-				aam(acl, (acm + ada) - 18, acn, 18, 0x999999, 0x777777,
+				aam(keyX, (keyY + keyYOffset) - 18, keyRX, 18, 0x999999, 0x777777,
 						0x555555, "Next page");
-				int i2 = acm + 3 + 18;
+				int i2 = keyY + 3 + 18;
 				for (int k2 = 0; k2 < 25; k2++) {
 					if (k2 + adb < abi.length && k2 + adb < shopList.length) {
 						if (shopList[k2 + adb].equals("???"))
 							continue;
-						abi[k2 + adb].acg(acl + 3, i2);
-						abj.adn(shopList[k2 + adb], acl + 21, i2 + 14, 0);
+						abi[k2 + adb].acg(keyX + 3, i2);
+						abj.adn(shopList[k2 + adb], keyX + 21, i2 + 14, 0);
 						int i3 = 0xffffff;
 						if (ade == k2 + adb)
 							i3 = 0xbbaaaa;
 						if (adh > 0 && adh % 10 < 5 && adg == k2 + adb)
 							i3 = 0xffff00;
-						abj.adn(shopList[k2 + adb], acl + 20, i2 + 13, i3);
+						abj.adn(shopList[k2 + adb], keyX + 20, i2 + 13, i3);
 					}
 					i2 += 17;
 				}
 
 			}
-			aam(adk, adl + adi, adj, 18, aab, aac, aad, "Overview");
-			aam(acl, acm + ada, acn, 18, aab, aac, aad, "Key");
+			aam(mapX, mapY + mapYOffset, mapXOffset, 18, aab, aac, aad, "Overview");
+			aam(keyX, keyY + keyYOffset, keyRX, 18, aab, aac, aad, "Key");
 			if (currentZoom == 3D)
 				aam(170, 471, 50, 30, aae, aaf, aag, "37%");
 			else
@@ -1450,10 +1457,10 @@ public class MapView extends RSAppet {
 		aci = new int[2000];
 		acj = new int[2000];
 		ack = new int[2000];
-		acl = 5;
-		acm = 13;
-		acn = 140;
-		ada = 470;
+		keyX = 5;
+		keyY = 13;
+		keyRX = 140;
+		keyYOffset = 470;
 		showKeyInterface = false;
 		ade = -1;
 		adf = -1;
@@ -1507,10 +1514,10 @@ public class MapView extends RSAppet {
 	private int aci[];
 	private int acj[];
 	private int ack[];
-	private int acl;
-	private int acm;
-	private int acn;
-	private int ada;
+	private int keyX;
+	private int keyY;
+	private int keyRX;
+	private int keyYOffset;
 	private int adb;
 	private int adc;
 	private boolean showKeyInterface;
@@ -1518,10 +1525,10 @@ public class MapView extends RSAppet {
 	private int adf;
 	private int adg;
 	private int adh;
-	private int adi;
-	private int adj;
-	private int adk;
-	private int adl;
+	private int mapYOffset;
+	private int mapXOffset;
+	private int mapX;
+	private int mapY;
 	private boolean showMapInterface;
 	private Sprite adn;
 	private int aea;
