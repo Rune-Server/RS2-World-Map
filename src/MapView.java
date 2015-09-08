@@ -18,6 +18,10 @@ public class MapView extends EventHandler {
 		agj(635, 503);
 	}
 
+
+	/**
+	 * Startup
+	 */
 	public final void aga() {
 		o o1 = abb();
 		afc(100, "Please wait... Rendering Map");
@@ -314,47 +318,47 @@ public class MapView extends EventHandler {
 	public final void ahd() {
 		if (super.ake[1] == 1) {
 			aen = (int) ((double) aen - 16D / ael);
-			aah = true;
+			keyPressed = true;
 		}
 		if (super.ake[2] == 1) {
 			aen = (int) ((double) aen + 16D / ael);
-			aah = true;
+			keyPressed = true;
 		}
 		if (super.ake[3] == 1) {
 			afa = (int) ((double) afa - 16D / ael);
-			aah = true;
+			keyPressed = true;
 		}
 		if (super.ake[4] == 1) {
 			afa = (int) ((double) afa + 16D / ael);
-			aah = true;
+			keyPressed = true;
 		}
-		for (int k = 1; k > 0;) {
-			k = agd();
-			if (k == 49) {
-				aem = 3D;
-				aah = true;
+		for (int key = 1; key > 0;) {
+			key = agd();
+			if (key == 49) {
+				zoom = 3D;
+				keyPressed = true;
 			}
-			if (k == 50) {
-				aem = 4D;
-				aah = true;
+			if (key == 50) {
+				zoom = 4D;
+				keyPressed = true;
 			}
-			if (k == 51) {
-				aem = 6D;
-				aah = true;
+			if (key == 51) {
+				zoom = 6D;
+				keyPressed = true;
 			}
-			if (k == 52) {
-				aem = 8D;
-				aah = true;
+			if (key == 52) {
+				zoom = 8D;
+				keyPressed = true;
 			}
-			if (k == 107 || k == 75) {
-				add = !add;
-				aah = true;
+			if (key == 107 || key == Constants.K) {
+				showKeyInterface = !showKeyInterface;
+				keyPressed = true;
 			}
-			if (k == 111 || k == 79) {
-				adm = !adm;
-				aah = true;
+			if (key == 111 || key == Constants.O) {
+				showMapInterface = !showMapInterface;
+				keyPressed = true;
 			}
-			if (super.ajd != null && k == 101) {
+			if (super.ajd != null && key == 101) {
 				System.out.println("Starting export...");
 				g g1 = new g(aal * 2, aam * 2);
 				g1.acf();
@@ -391,35 +395,35 @@ public class MapView extends EventHandler {
 			aed = afa;
 			if (super.akb > 170 && super.akb < 220 && super.akc > 471
 					&& super.akc < 503) {
-				aem = 3D;
+				zoom = 3D;
 				aea = -1;
 			}
 			if (super.akb > 230 && super.akb < 280 && super.akc > 471
 					&& super.akc < 503) {
-				aem = 4D;
+				zoom = 4D;
 				aea = -1;
 			}
 			if (super.akb > 290 && super.akb < 340 && super.akc > 471
 					&& super.akc < 503) {
-				aem = 6D;
+				zoom = 6D;
 				aea = -1;
 			}
 			if (super.akb > 350 && super.akb < 400 && super.akc > 471
 					&& super.akc < 503) {
-				aem = 8D;
+				zoom = 8D;
 				aea = -1;
 			}
 			if (super.akb > acl && super.akc > acm + ada
 					&& super.akb < acl + acn && super.akc < 503) {
-				add = !add;
+				showKeyInterface = !showKeyInterface;
 				aea = -1;
 			}
 			if (super.akb > adk && super.akc > adl + adi
 					&& super.akb < adk + adj && super.akc < 503) {
-				adm = !adm;
+				showMapInterface = !showMapInterface;
 				aea = -1;
 			}
-			if (add) {
+			if (showKeyInterface) {
 				if (super.akb > acl && super.akc > acm && super.akb < acl + acn
 						&& super.akc < acm + ada)
 					aea = -1;
@@ -431,9 +435,9 @@ public class MapView extends EventHandler {
 						&& adc < 50)
 					adc += 25;
 			}
-			aah = true;
+			keyPressed = true;
 		}
-		if (add) {
+		if (showKeyInterface) {
 			ade = -1;
 			if (super.aji > acl && super.aji < acl + acn) {
 				int i1 = acm + 21 + 5;
@@ -452,10 +456,10 @@ public class MapView extends EventHandler {
 			}
 			if (ade != adf) {
 				adf = ade;
-				aah = true;
+				keyPressed = true;
 			}
 		}
-		if ((super.ajh == 1 || super.aka == 1) && adm) {
+		if ((super.ajh == 1 || super.aka == 1) && showMapInterface) {
 			int j1 = super.akb;
 			int j2 = super.akc;
 			if (super.ajh == 1) {
@@ -466,36 +470,36 @@ public class MapView extends EventHandler {
 				aen = ((j1 - adk) * aal) / adj;
 				afa = ((j2 - adl) * aam) / adi;
 				aea = -1;
-				aah = true;
+				keyPressed = true;
 			}
 		}
 		if (super.ajh == 1 && aea != -1) {
-			aen = aec + (int) (((double) (aea - super.aji) * 2D) / aem);
-			afa = aed + (int) (((double) (aeb - super.ajj) * 2D) / aem);
-			aah = true;
+			aen = aec + (int) (((double) (aea - super.aji) * 2D) / zoom);
+			afa = aed + (int) (((double) (aeb - super.ajj) * 2D) / zoom);
+			keyPressed = true;
 		}
-		if (ael < aem) {
-			aah = true;
+		if (ael < zoom) {
+			keyPressed = true;
 			ael += ael / 30D;
-			if (ael > aem)
-				ael = aem;
+			if (ael > zoom)
+				ael = zoom;
 		}
-		if (ael > aem) {
-			aah = true;
+		if (ael > zoom) {
+			keyPressed = true;
 			ael -= ael / 30D;
-			if (ael < aem)
-				ael = aem;
+			if (ael < zoom)
+				ael = zoom;
 		}
 		if (adb < adc) {
-			aah = true;
+			keyPressed = true;
 			adb++;
 		}
 		if (adb > adc) {
-			aah = true;
+			keyPressed = true;
 			adb--;
 		}
 		if (adh > 0) {
-			aah = true;
+			keyPressed = true;
 			adh--;
 		}
 		int k1 = aen - (int) (635D / ael);
@@ -513,8 +517,8 @@ public class MapView extends EventHandler {
 	}
 
 	public final void age() {
-		if (aah) {
-			aah = false;
+		if (keyPressed) {
+			keyPressed = false;
 			aai = 0;
 			e.ajm();
 			int k = aen - (int) (635D / ael);
@@ -522,7 +526,7 @@ public class MapView extends EventHandler {
 			int j1 = aen + (int) (635D / ael);
 			int k1 = afa + (int) (503D / ael);
 			aan(k, i1, j1, k1, 0, 0, 635, 503);
-			if (adm) {
+			if (showMapInterface) {
 				adn.ack(adk, adl);
 				e.ajh(adk + (adj * k) / aal, adl + (adi * i1) / aam,
 						((j1 - k) * adj) / aal, ((k1 - i1) * adi) / aam,
@@ -540,7 +544,7 @@ public class MapView extends EventHandler {
 
 				}
 			}
-			if (add) {
+			if (showKeyInterface) {
 				aam(acl, acm, acn, 18, 0x999999, 0x777777, 0x555555,
 						"Prev page");
 				aam(acl, acm + 18, acn, ada - 36, 0x999999, 0x777777, 0x555555,
@@ -567,19 +571,19 @@ public class MapView extends EventHandler {
 			}
 			aam(adk, adl + adi, adj, 18, aab, aac, aad, "Overview");
 			aam(acl, acm + ada, acn, 18, aab, aac, aad, "Key");
-			if (aem == 3D)
+			if (zoom == 3D)
 				aam(170, 471, 50, 30, aae, aaf, aag, "37%");
 			else
 				aam(170, 471, 50, 30, aab, aac, aad, "37%");
-			if (aem == 4D)
+			if (zoom == 4D)
 				aam(230, 471, 50, 30, aae, aaf, aag, "50%");
 			else
 				aam(230, 471, 50, 30, aab, aac, aad, "50%");
-			if (aem == 6D)
+			if (zoom == 6D)
 				aam(290, 471, 50, 30, aae, aaf, aag, "75%");
 			else
 				aam(290, 471, 50, 30, aab, aac, aad, "75%");
-			if (aem == 8D)
+			if (zoom == 8D)
 				aam(350, 471, 50, 30, aae, aaf, aag, "100%");
 			else
 				aam(350, 471, 50, 30, aab, aac, aad, "100%");
@@ -757,7 +761,7 @@ public class MapView extends EventHandler {
 				}
 
 		}
-		if (ael == aem && aee) {
+		if (ael == zoom && aee) {
 			for (int j4 = 0; j4 < aef; j4++) {
 				int i5 = aei[j4];
 				int k5 = aej[j4];
@@ -1437,7 +1441,7 @@ public class MapView extends EventHandler {
 		aae = 0xaa0000;
 		aaf = 0x990000;
 		aag = 0x880000;
-		aah = true;
+		keyPressed = true;
 		abh = new h[100];
 		abi = new g[100];
 		ace = new int[2000];
@@ -1450,18 +1454,18 @@ public class MapView extends EventHandler {
 		acm = 13;
 		acn = 140;
 		ada = 470;
-		add = false;
+		showKeyInterface = false;
 		ade = -1;
 		adf = -1;
 		adg = -1;
-		adm = false;
+		showMapInterface = false;
 		aeg = 1000;
 		aeh = new String[aeg];
 		aei = new int[aeg];
 		aej = new int[aeg];
 		aek = new int[aeg];
 		ael = 4D;
-		aem = 4D;
+		zoom = 4D;
 	}
 
 	private static boolean aaa;
@@ -1471,7 +1475,7 @@ public class MapView extends EventHandler {
 	private int aae;
 	private int aaf;
 	private int aag;
-	private boolean aah;
+	private boolean keyPressed;
 	private int aai;
 	private static int aaj;
 	private static int aak;
@@ -1509,7 +1513,7 @@ public class MapView extends EventHandler {
 	private int ada;
 	private int adb;
 	private int adc;
-	private boolean add;
+	private boolean showKeyInterface;
 	private int ade;
 	private int adf;
 	private int adg;
@@ -1518,7 +1522,7 @@ public class MapView extends EventHandler {
 	private int adj;
 	private int adk;
 	private int adl;
-	private boolean adm;
+	private boolean showMapInterface;
 	private g adn;
 	private int aea;
 	private int aeb;
@@ -1532,7 +1536,7 @@ public class MapView extends EventHandler {
 	private int aej[];
 	private int aek[];
 	private double ael;
-	private double aem;
+	private double zoom;
 	private static int aen;
 	private static int afa;
 	private String afb[] = { "General Store", "Sword Shop", "Magic Shop",
