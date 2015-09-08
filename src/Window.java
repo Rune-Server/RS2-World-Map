@@ -7,7 +7,7 @@ public final class Window extends Frame {
 	 */
 	private static final long serialVersionUID = 5287663274925283481L;
 
-	public Window(EventHandler arg0, int width, int height) {
+	public Window(RSAppet arg0, int width, int height) {
 		int heightOffset = 5;
 		System.out.println(arg0);
 		ahj = arg0;
@@ -23,7 +23,7 @@ public final class Window extends Frame {
 	}
 
 	public final void adk(Graphics arg0) {
-		ahj.afi(arg0);
+		ahj.update(arg0);
 	}
 
 	public Graphics adl() {
@@ -33,5 +33,5 @@ public final class Window extends Frame {
 		return g;
 	}
 
-	EventHandler ahj;
+	RSAppet ahj;
 }

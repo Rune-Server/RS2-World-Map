@@ -1,17 +1,17 @@
 public class DrawingArea extends d {
 
-	public static void ajd(int arg0, int arg1, int arg2, int arg3) {
-		if (arg1 < bbh || arg1 >= bbi)
+	public static void drawHorizontal(int x, int y, int length, int color) {
+		if (y < bbh || y >= bbi)
 			return;
-		if (arg0 < bbj) {
-			arg2 -= bbj - arg0;
-			arg0 = bbj;
+		if (x < bbj) {
+			length -= bbj - x;
+			x = bbj;
 		}
-		if (arg0 + arg2 > bbk)
-			arg2 = bbk - arg0;
-		int i = arg0 + arg1 * bbf;
-		for (int j = 0; j < arg2; j++)
-			bbe[i + j] = arg3;
+		if (x + length > bbk)
+			length = bbk - x;
+		int pixelIndex = x + y * bbf;
+		for (int pixelOffset = 0; pixelOffset < length; pixelOffset++)
+			bbe[pixelIndex + pixelOffset] = color;
 
 	}
 
@@ -84,8 +84,8 @@ public class DrawingArea extends d {
 	}
 
 	public static void aji(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		ajd(arg0, arg1, arg2, arg4);
-		ajd(arg0, (arg1 + arg3) - 1, arg2, arg4);
+		drawHorizontal(arg0, arg1, arg2, arg4);
+		drawHorizontal(arg0, (arg1 + arg3) - 1, arg2, arg4);
 		aje(arg0, arg1, arg3, arg4);
 		aje((arg0 + arg2) - 1, arg1, arg3, arg4);
 	}

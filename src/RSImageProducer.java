@@ -3,7 +3,14 @@ import java.awt.image.*;
 
 public final class RSImageProducer implements ImageProducer, ImageObserver {
 
-	public void acm() {
+	public int pixels[];
+	public int width;
+	public int height;
+	ColorModel colorModel;
+	ImageConsumer imageConsumer;
+	public Image image;
+	
+	public void initializeDrawingArea() {
 		DrawingArea.setArea(pixels, width, height);
 	}
 
@@ -19,7 +26,7 @@ public final class RSImageProducer implements ImageProducer, ImageObserver {
 		component.prepareImage(image, this);
 		notifyConsumer();
 		component.prepareImage(image, this);
-		acm();
+		initializeDrawingArea();
 	}
 
 	public boolean imageUpdate(Image arg0, int arg1, int arg2, int i, int j,
@@ -32,12 +39,12 @@ public final class RSImageProducer implements ImageProducer, ImageObserver {
 	}
 
 	public synchronized boolean isConsumer(ImageConsumer arg0) {
-		return ahh == arg0;
+		return imageConsumer == arg0;
 	}
 
 	public synchronized void removeConsumer(ImageConsumer arg0) {
-		if (ahh == arg0)
-			ahh = null;
+		if (imageConsumer == arg0)
+			imageConsumer = null;
 	}
 
 	public void ade(Graphics arg0, int arg1, int arg2) {
@@ -50,7 +57,7 @@ public final class RSImageProducer implements ImageProducer, ImageObserver {
 	}
 
 	public synchronized void addConsumer(ImageConsumer arg0) {
-		ahh = arg0;
+		imageConsumer = arg0;
 		arg0.setDimensions(width, height);
 		arg0.setProperties(null);
 		arg0.setColorModel(colorModel);
@@ -58,19 +65,12 @@ public final class RSImageProducer implements ImageProducer, ImageObserver {
 	}
 
 	public synchronized void notifyConsumer() {
-		if (ahh == null) {
+		if (imageConsumer == null) {
 			return;
 		} else {
-			ahh.setPixels(0, 0, width, height, colorModel, pixels, 0, width);
-			ahh.imageComplete(2);
+			imageConsumer.setPixels(0, 0, width, height, colorModel, pixels, 0, width);
+			imageConsumer.imageComplete(2);
 			return;
 		}
 	}
-
-	public int pixels[];
-	public int width;
-	public int height;
-	ColorModel colorModel;
-	ImageConsumer ahh;
-	public Image image;
 }

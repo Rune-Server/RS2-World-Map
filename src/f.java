@@ -4,7 +4,7 @@ import java.awt.image.PixelGrabber;
 public class f extends DrawingArea {
 
 	private void ahk(Font arg0, FontMetrics arg1, char arg2, int arg3,
-			boolean arg4, EventHandler arg5) {
+			boolean arg4, RSAppet arg5) {
 		int i = arg1.charWidth(arg2);
 		int j = i;
 		if (arg4)
@@ -20,7 +20,7 @@ public class f extends DrawingArea {
 		int k = arg1.getMaxAscent();
 		int l = arg1.getMaxAscent() + arg1.getMaxDescent();
 		int i1 = arg1.getHeight();
-		Image image = arg5.agf().createImage(i, l);
+		Image image = arg5.getGameComponent().createImage(i, l);
 		Graphics g = image.getGraphics();
 		g.setColor(Color.black);
 		g.fillRect(0, 0, i, l);
@@ -127,7 +127,7 @@ public class f extends DrawingArea {
 		}
 	}
 
-	public f(int arg0, boolean arg1, EventHandler arg2) {
+	public f(int arg0, boolean arg1, RSAppet arg2) {
 		akj = false;
 		akk = 0;
 		akl = new byte[0x186a0];

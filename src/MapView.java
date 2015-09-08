@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.URL;
 import java.security.MessageDigest;
 
-public class MapView extends EventHandler {
+public class MapView extends RSAppet {
 
 	/**
 	 * 
@@ -11,7 +11,7 @@ public class MapView extends EventHandler {
 
 	public static final void main(String arg0[]) {
 		MapView mapview1 = new MapView();
-		mapview1.agc(635, 503);
+		mapview1.createFrame(635, 503);
 	}
 
 	public final void aab() {
@@ -24,7 +24,7 @@ public class MapView extends EventHandler {
 	 */
 	public final void aga() {
 		o o1 = abb();
-		afc(100, "Please wait... Rendering Map");
+		drawLoadingText(100, "Please wait... Rendering Map");
 		j j1 = new j(o1.abl("size.dat", null));
 		aaj = j1.aik();
 		aak = j1.aik();
@@ -94,7 +94,7 @@ public class MapView extends EventHandler {
 		aan(0, 0, aal, aam, 0, 0, adj, adi);
 		DrawingArea.aji(0, 0, adj, adi, 0);
 		DrawingArea.aji(1, 1, adj - 2, adi - 2, aab);
-		super.ajb.acm();
+		super.fullScreen.initializeDrawingArea();
 	}
 
 	private final void aad(byte arg0[], byte arg1[][], byte arg2[][],
@@ -363,7 +363,7 @@ public class MapView extends EventHandler {
 				Sprite g1 = new Sprite(aal * 2, aam * 2);
 				g1.acf();
 				aan(0, 0, aal, aam, 0, 0, aal * 2, aam * 2);
-				super.ajb.acm();
+				super.fullScreen.initializeDrawingArea();
 				int l1 = g1.agk.length;
 				byte abyte0[] = new byte[l1 * 3];
 				int i3 = 0;
@@ -590,7 +590,7 @@ public class MapView extends EventHandler {
 		}
 		aai--;
 		if (aai <= 0) {
-			super.ajb.ade(super.aja, 0, 0);
+			super.fullScreen.ade(super.graphics, 0, 0);
 			aai = 50;
 		}
 	}
@@ -607,9 +607,9 @@ public class MapView extends EventHandler {
 		arg2 -= 2;
 		arg3 -= 2;
 		DrawingArea.ajl(arg0, arg1, arg2, arg3, arg5);
-		DrawingArea.ajd(arg0, arg1, arg2, arg4);
+		DrawingArea.drawHorizontal(arg0, arg1, arg2, arg4);
 		DrawingArea.aje(arg0, arg1, arg3, arg4);
-		DrawingArea.ajd(arg0, (arg1 + arg3) - 1, arg2, arg6);
+		DrawingArea.drawHorizontal(arg0, (arg1 + arg3) - 1, arg2, arg6);
 		DrawingArea.aje((arg0 + arg2) - 1, arg1, arg3, arg6);
 		abj.aec(arg7, arg0 + arg2 / 2 + 1, arg1 + arg3 / 2 + 1 + 4, 0);
 		abj.aec(arg7, arg0 + arg2 / 2, arg1 + arg3 / 2 + 4, 0xffffff);
@@ -694,38 +694,38 @@ public class MapView extends EventHandler {
 							if (l10 == 1)
 								DrawingArea.aje(j3, l8, j10, l12);
 							else if (l10 == 2)
-								DrawingArea.ajd(j3, l8, l4, l12);
+								DrawingArea.drawHorizontal(j3, l8, l4, l12);
 							else if (l10 == 3)
 								DrawingArea.aje(j11, l8, j10, l12);
 							else if (l10 == 4)
-								DrawingArea.ajd(j3, i12, l4, l12);
+								DrawingArea.drawHorizontal(j3, i12, l4, l12);
 							else if (l10 == 9) {
 								DrawingArea.aje(j3, l8, j10, 0xffffff);
-								DrawingArea.ajd(j3, l8, l4, l12);
+								DrawingArea.drawHorizontal(j3, l8, l4, l12);
 							} else if (l10 == 10) {
 								DrawingArea.aje(j11, l8, j10, 0xffffff);
-								DrawingArea.ajd(j3, l8, l4, l12);
+								DrawingArea.drawHorizontal(j3, l8, l4, l12);
 							} else if (l10 == 11) {
 								DrawingArea.aje(j11, l8, j10, 0xffffff);
-								DrawingArea.ajd(j3, i12, l4, l12);
+								DrawingArea.drawHorizontal(j3, i12, l4, l12);
 							} else if (l10 == 12) {
 								DrawingArea.aje(j3, l8, j10, 0xffffff);
-								DrawingArea.ajd(j3, i12, l4, l12);
+								DrawingArea.drawHorizontal(j3, i12, l4, l12);
 							} else if (l10 == 17)
-								DrawingArea.ajd(j3, l8, 1, l12);
+								DrawingArea.drawHorizontal(j3, l8, 1, l12);
 							else if (l10 == 18)
-								DrawingArea.ajd(j11, l8, 1, l12);
+								DrawingArea.drawHorizontal(j11, l8, 1, l12);
 							else if (l10 == 19)
-								DrawingArea.ajd(j11, i12, 1, l12);
+								DrawingArea.drawHorizontal(j11, i12, 1, l12);
 							else if (l10 == 20)
-								DrawingArea.ajd(j3, i12, 1, l12);
+								DrawingArea.drawHorizontal(j3, i12, 1, l12);
 							else if (l10 == 25) {
 								for (int i13 = 0; i13 < j10; i13++)
-									DrawingArea.ajd(j3 + i13, i12 - i13, 1, l12);
+									DrawingArea.drawHorizontal(j3 + i13, i12 - i13, 1, l12);
 
 							} else if (l10 == 26) {
 								for (int j13 = 0; j13 < j10; j13++)
-									DrawingArea.ajd(j3 + j13, l8 + j13, 1, l12);
+									DrawingArea.drawHorizontal(j3 + j13, l8 + j13, 1, l12);
 
 							}
 						}
@@ -1338,7 +1338,7 @@ public class MapView extends EventHandler {
 
 	private final byte[] abc() {
 		System.out.println("Updating");
-		afc(0, "Requesting map");
+		drawLoadingText(0, "Requesting map");
 		try {
 			String s = "";
 			for (int k = 0; k < 10; k++)
@@ -1365,7 +1365,7 @@ public class MapView extends EventHandler {
 				j1 += i2;
 				int j2 = (j1 * 100) / k1;
 				if (j2 != i1)
-					afc(j2, "Loading map - " + j2 + "%");
+					drawLoadingText(j2, "Loading map - " + j2 + "%");
 				i1 = j2;
 			}
 			datainputstream.close();
