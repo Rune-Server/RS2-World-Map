@@ -1,4 +1,4 @@
-public class e extends d {
+public class DrawingArea extends d {
 
 	public static void ajd(int arg0, int arg1, int arg2, int arg3) {
 		if (arg1 < bbh || arg1 >= bbi)
@@ -28,9 +28,6 @@ public class e extends d {
 		for (int j = 0; j < arg2; j++)
 			bbe[i + j * bbf] = arg3;
 
-	}
-
-	public e() {
 	}
 
 	public static void ajg(int arg0, int arg1, int arg2, int arg3) {
@@ -93,7 +90,7 @@ public class e extends d {
 		aje((arg0 + arg2) - 1, arg1, arg3, arg4);
 	}
 
-	public static void ajj(int arg0[], int arg1, int arg2) {
+	public static void setArea(int arg0[], int arg1, int arg2) {
 		bbe = arg0;
 		bbf = arg1;
 		bbg = arg2;
@@ -129,7 +126,6 @@ public class e extends d {
 		int i = bbf * bbg;
 		for (int j = 0; j < i; j++)
 			bbe[j] = 0;
-
 	}
 
 	public static void ajn(int arg0, int arg1, int arg2, int arg3, int arg4) {
@@ -161,9 +157,7 @@ public class e extends d {
 						+ (l + k1 >> 8);
 				bbe[k3++] = i4;
 			}
-
 		}
-
 	}
 
 	public static int bbe[];
