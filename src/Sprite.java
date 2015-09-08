@@ -1,38 +1,46 @@
-public final class g extends e {
+public final class Sprite extends DrawingArea {
 
+	public int agk[];
+	public int agl;
+	public int agm;
+	public int agn;
+	public int aha;
+	public int ahb;
+	public int ahc;
+	
 	public void acf() {
-		e.ajj(agk, agl, agm);
+		DrawingArea.setArea(agk, agl, agm);
 	}
 
 	public void acg(int arg0, int arg1) {
 		arg0 += agn;
 		arg1 += aha;
-		int i = arg0 + arg1 * e.bbf;
+		int i = arg0 + arg1 * DrawingArea.bbf;
 		int k = 0;
 		int l = agm;
 		int i1 = agl;
-		int j1 = e.bbf - i1;
+		int j1 = DrawingArea.bbf - i1;
 		int k1 = 0;
-		if (arg1 < e.bbh) {
-			int l1 = e.bbh - arg1;
+		if (arg1 < DrawingArea.bbh) {
+			int l1 = DrawingArea.bbh - arg1;
 			l -= l1;
-			arg1 = e.bbh;
+			arg1 = DrawingArea.bbh;
 			k += l1 * i1;
-			i += l1 * e.bbf;
+			i += l1 * DrawingArea.bbf;
 		}
-		if (arg1 + l > e.bbi)
-			l -= (arg1 + l) - e.bbi;
-		if (arg0 < e.bbj) {
-			int i2 = e.bbj - arg0;
+		if (arg1 + l > DrawingArea.bbi)
+			l -= (arg1 + l) - DrawingArea.bbi;
+		if (arg0 < DrawingArea.bbj) {
+			int i2 = DrawingArea.bbj - arg0;
 			i1 -= i2;
-			arg0 = e.bbj;
+			arg0 = DrawingArea.bbj;
 			k += i2;
 			i += i2;
 			k1 += i2;
 			j1 += i2;
 		}
-		if (arg0 + i1 > e.bbk) {
-			int j2 = (arg0 + i1) - e.bbk;
+		if (arg0 + i1 > DrawingArea.bbk) {
+			int j2 = (arg0 + i1) - DrawingArea.bbk;
 			i1 -= j2;
 			k1 += j2;
 			j1 += j2;
@@ -40,7 +48,7 @@ public final class g extends e {
 		if (i1 <= 0 || l <= 0) {
 			return;
 		} else {
-			ach(e.bbe, agk, 0, k, i, i1, l, j1, k1);
+			ach(DrawingArea.bbe, agk, 0, k, i, i1, l, j1, k1);
 			return;
 		}
 	}
@@ -87,14 +95,14 @@ public final class g extends e {
 
 	}
 
-	public g(int arg0, int arg1) {
+	public Sprite(int arg0, int arg1) {
 		agk = new int[arg0 * arg1];
 		agl = ahb = arg0;
 		agm = ahc = arg1;
 		agn = aha = 0;
 	}
 
-	public g(o arg0, String arg1, int arg2) {
+	public Sprite(o arg0, String arg1, int arg2) {
 		j j1 = new j(arg0.abl(arg1 + ".dat", null));
 		j j2 = new j(arg0.abl("index.dat", null));
 		j2.ala = j1.aik();
@@ -138,32 +146,32 @@ public final class g extends e {
 	public void ack(int arg0, int arg1) {
 		arg0 += agn;
 		arg1 += aha;
-		int i = arg0 + arg1 * e.bbf;
+		int i = arg0 + arg1 * DrawingArea.bbf;
 		int k = 0;
 		int l = agm;
 		int i1 = agl;
-		int j1 = e.bbf - i1;
+		int j1 = DrawingArea.bbf - i1;
 		int k1 = 0;
-		if (arg1 < e.bbh) {
-			int l1 = e.bbh - arg1;
+		if (arg1 < DrawingArea.bbh) {
+			int l1 = DrawingArea.bbh - arg1;
 			l -= l1;
-			arg1 = e.bbh;
+			arg1 = DrawingArea.bbh;
 			k += l1 * i1;
-			i += l1 * e.bbf;
+			i += l1 * DrawingArea.bbf;
 		}
-		if (arg1 + l > e.bbi)
-			l -= (arg1 + l) - e.bbi;
-		if (arg0 < e.bbj) {
-			int i2 = e.bbj - arg0;
+		if (arg1 + l > DrawingArea.bbi)
+			l -= (arg1 + l) - DrawingArea.bbi;
+		if (arg0 < DrawingArea.bbj) {
+			int i2 = DrawingArea.bbj - arg0;
 			i1 -= i2;
-			arg0 = e.bbj;
+			arg0 = DrawingArea.bbj;
 			k += i2;
 			i += i2;
 			k1 += i2;
 			j1 += i2;
 		}
-		if (arg0 + i1 > e.bbk) {
-			int j2 = (arg0 + i1) - e.bbk;
+		if (arg0 + i1 > DrawingArea.bbk) {
+			int j2 = (arg0 + i1) - DrawingArea.bbk;
 			i1 -= j2;
 			k1 += j2;
 			j1 += j2;
@@ -171,7 +179,7 @@ public final class g extends e {
 		if (i1 <= 0 || l <= 0) {
 			return;
 		} else {
-			acl(e.bbe, agk, k, i, i1, l, j1, k1);
+			acl(DrawingArea.bbe, agk, k, i, i1, l, j1, k1);
 			return;
 		}
 	}
@@ -194,14 +202,5 @@ public final class g extends e {
 			arg3 += arg6;
 			arg2 += arg7;
 		}
-
 	}
-
-	public int agk[];
-	public int agl;
-	public int agm;
-	public int agn;
-	public int aha;
-	public int ahb;
-	public int ahc;
 }
