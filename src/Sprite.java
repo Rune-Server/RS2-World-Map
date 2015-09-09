@@ -15,18 +15,18 @@ public final class Sprite extends DrawingArea {
 	public void acg(int arg0, int arg1) {
 		arg0 += agn;
 		arg1 += aha;
-		int i = arg0 + arg1 * DrawingArea.bbf;
+		int i = arg0 + arg1 * DrawingArea.width;
 		int k = 0;
 		int l = agm;
 		int i1 = agl;
-		int j1 = DrawingArea.bbf - i1;
+		int j1 = DrawingArea.width - i1;
 		int k1 = 0;
 		if (arg1 < DrawingArea.bbh) {
 			int l1 = DrawingArea.bbh - arg1;
 			l -= l1;
 			arg1 = DrawingArea.bbh;
 			k += l1 * i1;
-			i += l1 * DrawingArea.bbf;
+			i += l1 * DrawingArea.width;
 		}
 		if (arg1 + l > DrawingArea.bbi)
 			l -= (arg1 + l) - DrawingArea.bbi;
@@ -48,7 +48,7 @@ public final class Sprite extends DrawingArea {
 		if (i1 <= 0 || l <= 0) {
 			return;
 		} else {
-			ach(DrawingArea.bbe, agk, 0, k, i, i1, l, j1, k1);
+			ach(DrawingArea.pixels, agk, 0, k, i, i1, l, j1, k1);
 			return;
 		}
 	}
@@ -146,18 +146,18 @@ public final class Sprite extends DrawingArea {
 	public void ack(int arg0, int arg1) {
 		arg0 += agn;
 		arg1 += aha;
-		int i = arg0 + arg1 * DrawingArea.bbf;
+		int i = arg0 + arg1 * DrawingArea.width;
 		int k = 0;
 		int l = agm;
 		int i1 = agl;
-		int j1 = DrawingArea.bbf - i1;
+		int j1 = DrawingArea.width - i1;
 		int k1 = 0;
 		if (arg1 < DrawingArea.bbh) {
 			int l1 = DrawingArea.bbh - arg1;
 			l -= l1;
 			arg1 = DrawingArea.bbh;
 			k += l1 * i1;
-			i += l1 * DrawingArea.bbf;
+			i += l1 * DrawingArea.width;
 		}
 		if (arg1 + l > DrawingArea.bbi)
 			l -= (arg1 + l) - DrawingArea.bbi;
@@ -179,7 +179,7 @@ public final class Sprite extends DrawingArea {
 		if (i1 <= 0 || l <= 0) {
 			return;
 		} else {
-			acl(DrawingArea.bbe, agk, k, i, i1, l, j1, k1);
+			acl(DrawingArea.pixels, agk, k, i, i1, l, j1, k1);
 			return;
 		}
 	}

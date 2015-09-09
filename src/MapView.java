@@ -92,8 +92,8 @@ public class MapView extends RSAppet {
 		adn = new Sprite(mapXOffset, mapYOffset);
 		adn.acf();
 		aan(0, 0, aal, aam, 0, 0, mapXOffset, mapYOffset);
-		DrawingArea.aji(0, 0, mapXOffset, mapYOffset, 0);
-		DrawingArea.aji(1, 1, mapXOffset - 2, mapYOffset - 2, aab);
+		DrawingArea.drawRectangle(0, 0, mapXOffset, mapYOffset, 0);
+		DrawingArea.drawRectangle(1, 1, mapXOffset - 2, mapYOffset - 2, aab);
 		super.fullScreen.initializeDrawingArea();
 	}
 
@@ -524,7 +524,7 @@ public class MapView extends RSAppet {
 		if (keyPressed) {
 			keyPressed = false;
 			aai = 0;
-			DrawingArea.ajm();
+			DrawingArea.clear();
 			int k = aen - (int) (635D / ael);
 			int i1 = afa - (int) (503D / ael);
 			int j1 = aen + (int) (635D / ael);
@@ -532,10 +532,10 @@ public class MapView extends RSAppet {
 			aan(k, i1, j1, k1, 0, 0, 635, 503);
 			if (showMapInterface) {
 				adn.ack(mapX, mapY);
-				DrawingArea.ajh(mapX + (mapXOffset * k) / aal, mapY + (mapYOffset * i1) / aam,
+				DrawingArea.fillOpacRect(mapX + (mapXOffset * k) / aal, mapY + (mapYOffset * i1) / aam,
 						((j1 - k) * mapXOffset) / aal, ((k1 - i1) * mapYOffset) / aam,
 						0xff0000, 128);
-				DrawingArea.aji(mapX + (mapXOffset * k) / aal, mapY + (mapYOffset * i1) / aam,
+				DrawingArea.drawRectangle(mapX + (mapXOffset * k) / aal, mapY + (mapYOffset * i1) / aam,
 						((j1 - k) * mapXOffset) / aal, ((k1 - i1) * mapYOffset) / aam,
 						0xff0000);
 				if (adh > 0 && adh % 10 < 5) {
@@ -543,7 +543,7 @@ public class MapView extends RSAppet {
 						if (ack[l1] == adg) {
 							int j2 = mapX + (mapXOffset * aci[l1]) / aal;
 							int l2 = mapY + (mapYOffset * acj[l1]) / aam;
-							DrawingArea.ajn(j2, l2, 2, 0xffff00, 256);
+							DrawingArea.drawDot(j2, l2, 2, 0xffff00, 256);
 						}
 
 				}
@@ -605,16 +605,16 @@ public class MapView extends RSAppet {
 
 	private final void aam(int arg0, int arg1, int arg2, int arg3, int arg4,
 			int arg5, int arg6, String arg7) {
-		DrawingArea.aji(arg0, arg1, arg2, arg3, 0);
+		DrawingArea.drawRectangle(arg0, arg1, arg2, arg3, 0);
 		arg0++;
 		arg1++;
 		arg2 -= 2;
 		arg3 -= 2;
-		DrawingArea.ajl(arg0, arg1, arg2, arg3, arg5);
+		DrawingArea.fillRectangle(arg0, arg1, arg2, arg3, arg5);
 		DrawingArea.drawHorizontal(arg0, arg1, arg2, arg4);
-		DrawingArea.aje(arg0, arg1, arg3, arg4);
+		DrawingArea.drawVertical(arg0, arg1, arg3, arg4);
 		DrawingArea.drawHorizontal(arg0, (arg1 + arg3) - 1, arg2, arg6);
-		DrawingArea.aje((arg0 + arg2) - 1, arg1, arg3, arg6);
+		DrawingArea.drawVertical((arg0 + arg2) - 1, arg1, arg3, arg6);
 		abj.drawCenteredString(arg7, arg0 + arg2 / 2 + 1, arg1 + arg3 / 2 + 1 + 4, 0);
 		abj.drawCenteredString(arg7, arg0 + arg2 / 2, arg1 + arg3 / 2 + 4, 0xffffff);
 	}
@@ -644,14 +644,14 @@ public class MapView extends RSAppet {
 						k7 += arg5;
 						int k9 = ai1[i6 + arg1];
 						if (k9 == 0) {
-							DrawingArea.ajl(i2, l6, k2 - i2, k7 - l6, ai[i6 + arg1]);
+							DrawingArea.fillRectangle(i2, l6, k2 - i2, k7 - l6, ai[i6 + arg1]);
 						} else {
 							byte byte0 = abyte0[i6 + arg1];
 							int k10 = byte0 & 0xfc;
 							if (k10 == 0 || i3 <= 1 || k8 <= 1)
-								DrawingArea.ajl(i2, l6, i3, k8, k9);
+								DrawingArea.fillRectangle(i2, l6, i3, k8, k9);
 							else
-								aba(DrawingArea.bbe, l6 * DrawingArea.bbf + i2, ai[i6 + arg1], k9,
+								aba(DrawingArea.pixels, l6 * DrawingArea.width + i2, ai[i6 + arg1], k9,
 										i3, k8, k10 >> 2, byte0 & 3);
 						}
 					}
@@ -696,24 +696,24 @@ public class MapView extends RSAppet {
 								l10 -= 4;
 							}
 							if (l10 == 1)
-								DrawingArea.aje(j3, l8, j10, l12);
+								DrawingArea.drawVertical(j3, l8, j10, l12);
 							else if (l10 == 2)
 								DrawingArea.drawHorizontal(j3, l8, l4, l12);
 							else if (l10 == 3)
-								DrawingArea.aje(j11, l8, j10, l12);
+								DrawingArea.drawVertical(j11, l8, j10, l12);
 							else if (l10 == 4)
 								DrawingArea.drawHorizontal(j3, i12, l4, l12);
 							else if (l10 == 9) {
-								DrawingArea.aje(j3, l8, j10, 0xffffff);
+								DrawingArea.drawVertical(j3, l8, j10, 0xffffff);
 								DrawingArea.drawHorizontal(j3, l8, l4, l12);
 							} else if (l10 == 10) {
-								DrawingArea.aje(j11, l8, j10, 0xffffff);
+								DrawingArea.drawVertical(j11, l8, j10, 0xffffff);
 								DrawingArea.drawHorizontal(j3, l8, l4, l12);
 							} else if (l10 == 11) {
-								DrawingArea.aje(j11, l8, j10, 0xffffff);
+								DrawingArea.drawVertical(j11, l8, j10, 0xffffff);
 								DrawingArea.drawHorizontal(j3, i12, l4, l12);
 							} else if (l10 == 12) {
-								DrawingArea.aje(j3, l8, j10, 0xffffff);
+								DrawingArea.drawVertical(j3, l8, j10, 0xffffff);
 								DrawingArea.drawHorizontal(j3, i12, l4, l12);
 							} else if (l10 == 17)
 								DrawingArea.drawHorizontal(j3, l8, 1, l12);
@@ -759,8 +759,8 @@ public class MapView extends RSAppet {
 				if (acg[i4] == adg) {
 					abi[acg[i4]].acg(ace[i4] - 7, acf[i4] - 7);
 					if (adh % 10 < 5) {
-						DrawingArea.ajn(ace[i4], acf[i4], 15, 0xffff00, 128);
-						DrawingArea.ajn(ace[i4], acf[i4], 7, 0xffffff, 256);
+						DrawingArea.drawDot(ace[i4], acf[i4], 15, 0xffff00, 128);
+						DrawingArea.drawDot(ace[i4], acf[i4], 7, 0xffffff, 256);
 					}
 				}
 
@@ -846,7 +846,7 @@ public class MapView extends RSAppet {
 							/ (arg2 - arg0);
 					int i10 = arg5 + ((arg7 - arg5) * (k6 - arg1))
 							/ (arg3 - arg1);
-					DrawingArea.aji(j7, j8, j9 - j7, i10 - j8, 0xffffff);
+					DrawingArea.drawRectangle(j7, j8, j9 - j7, i10 - j8, 0xffffff);
 					abj.drawRightAlignedString(k4 + "_" + j5, j9 - 5, i10 - 5, 0xffffff);
 					if (k4 == 33 && j5 >= 71 && j5 <= 73)
 						abj.drawCenteredString("u_pass", (j9 + j7) / 2, (i10 + j8) / 2,
@@ -863,7 +863,7 @@ public class MapView extends RSAppet {
 
 	private final void aba(int arg0[], int arg1, int arg2, int arg3, int arg4,
 			int arg5, int arg6, int arg7) {
-		int k = DrawingArea.bbf - arg4;
+		int k = DrawingArea.width - arg4;
 		if (arg6 == 9) {
 			arg6 = 1;
 			arg7 = arg7 + 1 & 3;

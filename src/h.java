@@ -66,13 +66,13 @@ public final class h extends DrawingArea {
 				i1 = (i2 - (agf * arg3) % i2 << 16) / arg3;
 			arg2 = (arg2 * (agc - (l >> 16))) / l1;
 			arg3 = (arg3 * (agd - (i1 >> 16))) / i2;
-			int j2 = arg0 + arg1 * DrawingArea.bbf;
-			int k2 = DrawingArea.bbf - arg2;
+			int j2 = arg0 + arg1 * DrawingArea.width;
+			int k2 = DrawingArea.width - arg2;
 			if (arg1 < DrawingArea.bbh) {
 				int l2 = DrawingArea.bbh - arg1;
 				arg3 -= l2;
 				arg1 = 0;
-				j2 += l2 * DrawingArea.bbf;
+				j2 += l2 * DrawingArea.width;
 				i1 += k1 * l2;
 			}
 			if (arg1 + arg3 > DrawingArea.bbi)
@@ -90,7 +90,7 @@ public final class h extends DrawingArea {
 				arg2 -= j3;
 				k2 += j3;
 			}
-			acd(DrawingArea.bbe, aga, agb, l, i1, j2, k2, arg2, arg3, j1, k1, i);
+			acd(DrawingArea.pixels, aga, agb, l, i1, j2, k2, arg2, arg3, j1, k1, i);
 		} catch (Exception exception) {
 			System.out.println("error in sprite clipping routine");
 		}

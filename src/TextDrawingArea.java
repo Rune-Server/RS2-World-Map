@@ -108,8 +108,8 @@ public final class TextDrawingArea extends DrawingArea {
 
 	private void aed(byte arg0[], int arg1, int arg2, int arg3, int arg4,
 			int arg5) {
-		int k = arg1 + arg2 * DrawingArea.bbf;
-		int l = DrawingArea.bbf - arg3;
+		int k = arg1 + arg2 * DrawingArea.width;
+		int l = DrawingArea.width - arg3;
 		int i1 = 0;
 		int j1 = 0;
 		if (arg2 < DrawingArea.bbh) {
@@ -117,7 +117,7 @@ public final class TextDrawingArea extends DrawingArea {
 			arg4 -= k1;
 			arg2 = DrawingArea.bbh;
 			j1 += k1 * arg3;
-			k += k1 * DrawingArea.bbf;
+			k += k1 * DrawingArea.width;
 		}
 		if (arg2 + arg4 >= DrawingArea.bbi)
 			arg4 -= ((arg2 + arg4) - DrawingArea.bbi) + 1;
@@ -139,7 +139,7 @@ public final class TextDrawingArea extends DrawingArea {
 		if (arg3 <= 0 || arg4 <= 0) {
 			return;
 		} else {
-			aee(DrawingArea.bbe, arg0, arg5, j1, k, arg3, arg4, l, i1);
+			aee(DrawingArea.pixels, arg0, arg5, j1, k, arg3, arg4, l, i1);
 			return;
 		}
 	}

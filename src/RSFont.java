@@ -239,15 +239,15 @@ public class RSFont extends DrawingArea {
 		int k = arg4[arg0 + 3];
 		int l = arg4[arg0 + 4];
 		int i1 = arg4[arg0] * 16384 + arg4[arg0 + 1] * 128 + arg4[arg0 + 2];
-		int j1 = i + j * DrawingArea.bbf;
-		int k1 = DrawingArea.bbf - k;
+		int j1 = i + j * DrawingArea.width;
+		int k1 = DrawingArea.width - k;
 		int l1 = 0;
 		if (j < DrawingArea.bbh) {
 			int i2 = DrawingArea.bbh - j;
 			l -= i2;
 			j = DrawingArea.bbh;
 			i1 += i2 * k;
-			j1 += i2 * DrawingArea.bbf;
+			j1 += i2 * DrawingArea.width;
 		}
 		if (j + l >= DrawingArea.bbi)
 			l -= ((j + l) - DrawingArea.bbi) + 1;
@@ -268,9 +268,9 @@ public class RSFont extends DrawingArea {
 		}
 		if (k > 0 && l > 0)
 			if (arg5)
-				aia(DrawingArea.bbe, arg4, arg3, i1, j1, k, l, k1, l1);
+				aia(DrawingArea.pixels, arg4, arg3, i1, j1, k, l, k1, l1);
 			else
-				aif(DrawingArea.bbe, arg4, arg3, i1, j1, k, l, k1, l1);
+				aif(DrawingArea.pixels, arg4, arg3, i1, j1, k, l, k1, l1);
 	}
 
 	private void aif(int arg0[], byte arg1[], int arg2, int arg3, int arg4,
