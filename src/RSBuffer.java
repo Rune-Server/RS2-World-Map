@@ -1,4 +1,4 @@
-public final class j extends d {
+public final class RSBuffer extends d {
 
 	public int aih() {
 		ala += 4;
@@ -32,8 +32,8 @@ public final class j extends d {
 				+ (akn[ala - 1] & 0xff);
 	}
 
-	public j(byte arg0[]) {
-		akn = arg0;
+	public RSBuffer(byte data[]) {
+		akn = data;
 		ala = 0;
 	}
 
@@ -71,6 +71,5 @@ public final class j extends d {
 
 			alb[l] = i;
 		}
-
 	}
 }
