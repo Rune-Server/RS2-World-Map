@@ -1,44 +1,44 @@
 public final class RSBuffer extends d {
 
 	public int aih() {
-		ala += 4;
-		return ((akn[ala - 4] & 0xff) << 24) + ((akn[ala - 3] & 0xff) << 16)
-				+ ((akn[ala - 2] & 0xff) << 8) + (akn[ala - 1] & 0xff);
+		position += 4;
+		return ((akn[position - 4] & 0xff) << 24) + ((akn[position - 3] & 0xff) << 16)
+				+ ((akn[position - 2] & 0xff) << 8) + (akn[position - 1] & 0xff);
 	}
 
 	public int aii() {
-		return akn[ala++] & 0xff;
+		return akn[position++] & 0xff;
 	}
 
 	public byte aij() {
-		return akn[ala++];
+		return akn[position++];
 	}
 
-	public int aik() {
-		ala += 2;
-		return ((akn[ala - 2] & 0xff) << 8) + (akn[ala - 1] & 0xff);
+	public int getUShort() {
+		position += 2;
+		return ((akn[position - 2] & 0xff) << 8) + (akn[position - 1] & 0xff);
 	}
 
 	public String ail() {
-		int i = ala;
-		while (akn[ala++] != 10)
+		int i = position;
+		while (akn[position++] != 10)
 			;
-		return new String(akn, i, ala - i - 1);
+		return new String(akn, i, position - i - 1);
 	}
 
 	public int aim() {
-		ala += 3;
-		return ((akn[ala - 3] & 0xff) << 16) + ((akn[ala - 2] & 0xff) << 8)
-				+ (akn[ala - 1] & 0xff);
+		position += 3;
+		return ((akn[position - 3] & 0xff) << 16) + ((akn[position - 2] & 0xff) << 8)
+				+ (akn[position - 1] & 0xff);
 	}
 
 	public RSBuffer(byte data[]) {
 		akn = data;
-		ala = 0;
+		position = 0;
 	}
 
 	public byte akn[];
-	public int ala;
+	public int position;
 	private static int alb[];
 	private static final int alc[] = { 0, 1, 3, 7, 15, 31, 63, 127, 255, 511,
 			1023, 2047, 4095, 8191, 16383, 32767, 65535, 0x1ffff, 0x3ffff,

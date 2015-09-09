@@ -26,10 +26,10 @@ public class MapView extends RSAppet {
 		Archive o1 = abb();
 		drawLoadingText(100, "Please wait... Rendering Map");
 		RSBuffer j1 = new RSBuffer(o1.abl("size.dat", null));
-		aaj = j1.aik();
-		aak = j1.aik();
-		aal = j1.aik();
-		aam = j1.aik();
+		aaj = j1.getUShort();
+		aak = j1.getUShort();
+		aal = j1.getUShort();
+		aam = j1.getUShort();
 		aen = 3200 - aaj;
 		afa = (aak + aam) - 3200;
 		mapYOffset = 180;
@@ -37,16 +37,16 @@ public class MapView extends RSAppet {
 		mapX = 635 - mapXOffset - 5;
 		mapY = 503 - mapYOffset - 20;
 		j1 = new RSBuffer(o1.abl("labels.dat", null));
-		aef = j1.aik();
+		aef = j1.getUShort();
 		for (int k = 0; k < aef; k++) {
 			aeh[k] = j1.ail();
-			aei[k] = j1.aik();
-			aej[k] = j1.aik();
+			aei[k] = j1.getUShort();
+			aej[k] = j1.getUShort();
 			aek[k] = j1.aii();
 		}
 
 		j1 = new RSBuffer(o1.abl("floorcol.dat", null));
-		int i1 = j1.aik();
+		int i1 = j1.getUShort();
 		aan = new int[i1 + 1];
 		aba = new int[i1 + 1];
 		for (int k1 = 0; k1 < i1; k1++) {
@@ -391,7 +391,7 @@ public class MapView extends RSAppet {
 		if (super.clickType == 1) {
 			aea = super.mouseX;
 			aeb = super.mouseY;
-			aec = aen;
+			drawCenteredString = aen;
 			aed = afa;
 			// zoom 37%
 			if (super.mouseX > 166 && super.mouseX < 215 && super.mouseY > 449
@@ -478,7 +478,7 @@ public class MapView extends RSAppet {
 			}
 		}
 		if (super.clickMode2 == 1 && aea != -1) {
-			aen = aec + (int) (((double) (aea - super.xDragged) * 2D) / currentZoom);
+			aen = drawCenteredString + (int) (((double) (aea - super.xDragged) * 2D) / currentZoom);
 			afa = aed + (int) (((double) (aeb - super.yDragged) * 2D) / currentZoom);
 			keyPressed = true;
 		}
@@ -561,13 +561,13 @@ public class MapView extends RSAppet {
 						if (shopList[k2 + adb].equals("???"))
 							continue;
 						abi[k2 + adb].acg(keyX + 3, i2);
-						abj.adn(shopList[k2 + adb], keyX + 21, i2 + 14, 0);
+						abj.drawString(shopList[k2 + adb], keyX + 21, i2 + 14, 0);
 						int i3 = 0xffffff;
 						if (ade == k2 + adb)
 							i3 = 0xbbaaaa;
 						if (adh > 0 && adh % 10 < 5 && adg == k2 + adb)
 							i3 = 0xffff00;
-						abj.adn(shopList[k2 + adb], keyX + 20, i2 + 13, i3);
+						abj.drawString(shopList[k2 + adb], keyX + 20, i2 + 13, i3);
 					}
 					i2 += 17;
 				}
@@ -615,8 +615,8 @@ public class MapView extends RSAppet {
 		DrawingArea.aje(arg0, arg1, arg3, arg4);
 		DrawingArea.drawHorizontal(arg0, (arg1 + arg3) - 1, arg2, arg6);
 		DrawingArea.aje((arg0 + arg2) - 1, arg1, arg3, arg6);
-		abj.aec(arg7, arg0 + arg2 / 2 + 1, arg1 + arg3 / 2 + 1 + 4, 0);
-		abj.aec(arg7, arg0 + arg2 / 2, arg1 + arg3 / 2 + 4, 0xffffff);
+		abj.drawCenteredString(arg7, arg0 + arg2 / 2 + 1, arg1 + arg3 / 2 + 1 + 4, 0);
+		abj.drawCenteredString(arg7, arg0 + arg2 / 2, arg1 + arg3 / 2 + 4, 0xffffff);
 	}
 
 	private final void aan(int arg0, int arg1, int arg2, int arg3, int arg4,
@@ -847,12 +847,12 @@ public class MapView extends RSAppet {
 					int i10 = arg5 + ((arg7 - arg5) * (k6 - arg1))
 							/ (arg3 - arg1);
 					DrawingArea.aji(j7, j8, j9 - j7, i10 - j8, 0xffffff);
-					abj.aeb(k4 + "_" + j5, j9 - 5, i10 - 5, 0xffffff);
+					abj.drawRightAlignedString(k4 + "_" + j5, j9 - 5, i10 - 5, 0xffffff);
 					if (k4 == 33 && j5 >= 71 && j5 <= 73)
-						abj.aec("u_pass", (j9 + j7) / 2, (i10 + j8) / 2,
+						abj.drawCenteredString("u_pass", (j9 + j7) / 2, (i10 + j8) / 2,
 								0xff0000);
 					else if (k4 >= 32 && k4 <= 34 && j5 >= 70 && j5 <= 74)
-						abj.aec("u_pass", (j9 + j7) / 2, (i10 + j8) / 2,
+						abj.drawCenteredString("u_pass", (j9 + j7) / 2, (i10 + j8) / 2,
 								0xffff00);
 				}
 
@@ -1530,7 +1530,7 @@ public class MapView extends RSAppet {
 	private Sprite adn;
 	private int aea;
 	private int aeb;
-	private int aec;
+	private int drawCenteredString;
 	private int aed;
 	private static boolean aee = true;
 	private int aef;

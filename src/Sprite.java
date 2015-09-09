@@ -105,9 +105,9 @@ public final class Sprite extends DrawingArea {
 	public Sprite(Archive arg0, String arg1, int arg2) {
 		RSBuffer j1 = new RSBuffer(arg0.abl(arg1 + ".dat", null));
 		RSBuffer j2 = new RSBuffer(arg0.abl("index.dat", null));
-		j2.ala = j1.aik();
-		ahb = j2.aik();
-		ahc = j2.aik();
+		j2.position = j1.getUShort();
+		ahb = j2.getUShort();
+		ahc = j2.getUShort();
 		int i = j2.aii();
 		int ai[] = new int[i];
 		for (int k = 0; k < i - 1; k++) {
@@ -117,15 +117,15 @@ public final class Sprite extends DrawingArea {
 		}
 
 		for (int l = 0; l < arg2; l++) {
-			j2.ala += 2;
-			j1.ala += j2.aik() * j2.aik();
-			j2.ala++;
+			j2.position += 2;
+			j1.position += j2.getUShort() * j2.getUShort();
+			j2.position++;
 		}
 
 		agn = j2.aii();
 		aha = j2.aii();
-		agl = j2.aik();
-		agm = j2.aik();
+		agl = j2.getUShort();
+		agm = j2.getUShort();
 		int i1 = j2.aii();
 		int k1 = agl * agm;
 		agk = new int[k1];

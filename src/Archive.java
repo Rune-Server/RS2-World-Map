@@ -18,12 +18,12 @@ public final class Archive {
 			afc = data;
 			afi = false;
 		}
-		afd = j1.aik();
+		afd = j1.getUShort();
 		afe = new int[afd];
 		aff = new int[afd];
 		afg = new int[afd];
 		afh = new int[afd];
-		int l = j1.ala + afd * 10;
+		int l = j1.position + afd * 10;
 		for (int i1 = 0; i1 < afd; i1++) {
 			afe[i1] = j1.aih();
 			aff[i1] = j1.aim();

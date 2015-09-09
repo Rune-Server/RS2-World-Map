@@ -2,108 +2,108 @@ import java.util.Random;
 
 public final class TextDrawingArea extends DrawingArea {
 	
-	byte ahk[][];
-	int ahl[];
-	int ahm[];
+	byte indexedPixels[][];
+	int widths[];
+	int heights[];
 	int ahn[];
 	int aia[];
-	public int aib[];
-	public int aic;
+	public int charWidths[];
+	public int lastKnownHeight;
 	Random aid;
 	boolean aie;
 
-	public int adm(String arg0) {
-		if (arg0 == null)
+	public int getTextWidth(String text) {
+		if (text == null)
 			return 0;
-		int k = 0;
-		for (int l = 0; l < arg0.length(); l++)
-			k += aib[arg0.charAt(l)];
-		return k;
+		int width = 0;
+		for (int character = 0; character < text.length(); character++)
+			width += charWidths[text.charAt(character)];
+		return width;
 	}
 
-	public void adn(String arg0, int arg1, int arg2, int arg3) {
-		if (arg0 == null)
+	public void drawString(String text, int width, int height, int arg3) {
+		if (text == null)
 			return;
-		arg2 -= aic;
-		for (int k = 0; k < arg0.length(); k++) {
-			char c1 = arg0.charAt(k);
+		height -= lastKnownHeight;
+		for (int k = 0; k < text.length(); k++) {
+			char c1 = text.charAt(k);
 			if (c1 != ' ')
-				aed(ahk[c1], arg1 + ahn[c1], arg2 + aia[c1], ahl[c1], ahm[c1],
+				aed(indexedPixels[c1], width + ahn[c1], height + aia[c1], widths[c1], heights[c1],
 						arg3);
-			arg1 += aib[c1];
+			width += charWidths[c1];
 		}
 	}
 
-	public TextDrawingArea(Archive arg0, String arg1, boolean arg2) {
-		ahk = new byte[256][];
-		ahl = new int[256];
-		ahm = new int[256];
+	public TextDrawingArea(Archive archive, String file, boolean arg2) {
+		indexedPixels = new byte[256][];
+		widths = new int[256];
+		heights = new int[256];
 		ahn = new int[256];
 		aia = new int[256];
-		aib = new int[256];
-		aic = 0;
+		charWidths = new int[256];
+		lastKnownHeight = 0;
 		aid = new Random();
 		aie = false;
-		RSBuffer j1 = new RSBuffer(arg0.abl(arg1 + ".dat", null));
-		RSBuffer j2 = new RSBuffer(arg0.abl("index.dat", null));
+		RSBuffer buffer = new RSBuffer(archive.abl(file + ".dat", null));
+		RSBuffer index = new RSBuffer(archive.abl("index.dat", null));
 		byte byte0 = -1;
-		j2.ala = j1.aik() + 4;
-		int l = j2.aii();
+		index.position = buffer.getUShort() + 4;
+		int l = index.aii();
 		if (l > 0)
-			j2.ala += 3 * (l - 1);
+			index.position += 3 * (l - 1);
 		for (int i1 = 0; i1 < 256; i1++) {
 			int k = i1;
-			ahn[i1] = j2.aii();
-			aia[i1] = j2.aii();
-			int k1 = ahl[i1] = j2.aik();
-			int l1 = ahm[i1] = j2.aik();
-			int i2 = j2.aii();
+			ahn[i1] = index.aii();
+			aia[i1] = index.aii();
+			int k1 = widths[i1] = index.getUShort();
+			int l1 = heights[i1] = index.getUShort();
+			int i2 = index.aii();
 			int k2 = k1 * l1;
-			ahk[i1] = new byte[k2];
+			indexedPixels[i1] = new byte[k2];
 			if (i2 == 0) {
 				for (int l2 = 0; l2 < k2; l2++)
-					ahk[i1][l2] = j1.aij();
+					indexedPixels[i1][l2] = buffer.aij();
 
 			} else if (i2 == 1) {
 				for (int i3 = 0; i3 < k1; i3++) {
 					for (int k3 = 0; k3 < l1; k3++)
-						ahk[i1][i3 + k3 * k1] = j1.aij();
+						indexedPixels[i1][i3 + k3 * k1] = buffer.aij();
 
 				}
 
 			}
-			if (l1 > aic && i1 < 128)
-				aic = l1;
+			if (l1 > lastKnownHeight && i1 < 128)
+				lastKnownHeight = l1;
 			ahn[i1] = 1;
-			aib[i1] = k1 + 2;
+			charWidths[i1] = k1 + 2;
 			int j3 = 0;
 			for (int l3 = l1 / 7; l3 < l1; l3++)
-				j3 += ahk[i1][l3 * k1];
+				j3 += indexedPixels[i1][l3 * k1];
 
 			if (j3 <= l1 / 7) {
-				aib[i1]--;
+				charWidths[i1]--;
 				ahn[i1] = 0;
 			}
 			j3 = 0;
 			for (int i4 = l1 / 7; i4 < l1; i4++)
-				j3 += ahk[i1][(k1 - 1) + i4 * k1];
+				j3 += indexedPixels[i1][(k1 - 1) + i4 * k1];
 
 			if (j3 <= l1 / 7)
-				aib[i1]--;
+				charWidths[i1]--;
 		}
 
 		if (arg2)
-			aib[32] = aib[73];
+			charWidths[32] = charWidths[73];
 		else
-			aib[32] = aib[105];
+			charWidths[32] = charWidths[105];
 	}
 
-	public void aeb(String arg0, int arg1, int arg2, int arg3) {
-		adn(arg0, arg1 - adm(arg0), arg2, arg3);
+	public void drawRightAlignedString(String text, int width, int height, int arg3) {
+		drawString(text, width - getTextWidth(text), height, arg3);
 	}
 
-	public void aec(String arg0, int arg1, int arg2, int arg3) {
-		adn(arg0, arg1 - adm(arg0) / 2, arg2, arg3);
+	public void drawCenteredString(String text, int width, int height, int arg3) {
+		drawString(text, width - getTextWidth(text) / 2, height, arg3);
 	}
 
 	private void aed(byte arg0[], int arg1, int arg2, int arg3, int arg4,

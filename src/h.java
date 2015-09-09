@@ -12,24 +12,24 @@ public final class h extends DrawingArea {
 	public h(Archive arg0, String name, int arg2) {
 		RSBuffer j1 = new RSBuffer(arg0.abl(name + ".dat", null));
 		RSBuffer j2 = new RSBuffer(arg0.abl("index.dat", null));
-		j2.ala = j1.aik();
-		agg = j2.aik();
-		agh = j2.aik();
+		j2.position = j1.getUShort();
+		agg = j2.getUShort();
+		agh = j2.getUShort();
 		int i = j2.aii();
 		agb = new int[i];
 		for (int k = 0; k < i - 1; k++)
 			agb[k + 1] = j2.aim();
 
 		for (int l = 0; l < arg2; l++) {
-			j2.ala += 2;
-			j1.ala += j2.aik() * j2.aik();
-			j2.ala++;
+			j2.position += 2;
+			j1.position += j2.getUShort() * j2.getUShort();
+			j2.position++;
 		}
 
 		age = j2.aii();
 		agf = j2.aii();
-		agc = j2.aik();
-		agd = j2.aik();
+		agc = j2.getUShort();
+		agd = j2.getUShort();
 		int i1 = j2.aii();
 		int k1 = agc * agd;
 		aga = new byte[k1];
