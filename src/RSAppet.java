@@ -152,7 +152,7 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 	public final void windowActivated(WindowEvent windowevent) {
 	}
 
-	public void aga() {
+	public void startup() {
 	}
 
 	public final void start() {
@@ -300,7 +300,9 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 		writeIndex = 0;
 	}
 
-	public void ahd() {
+	
+	public void processLoop() {
+		
 	}
 
 	public final void focusLost(FocusEvent event) {
@@ -348,7 +350,7 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 		if (rsFrame != null)
 			rsFrame.addWindowListener(this);
 		drawLoadingText(0, "Loading...");
-		aga();
+		startup();
 		int i = 0;
 		int fpsRatio = 256;
 		int k = 1;
@@ -405,7 +407,7 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 				mouseY = localMouseY;
 				clickHold = clickTime;
 				clickMode1 = 0;
-				ahd();
+				processLoop();
 				readIndex = writeIndex;
 			}
 

@@ -9,9 +9,9 @@ public final class h extends DrawingArea {
 	public int agg;
 	public int agh;
 
-	public h(o arg0, String arg1, int arg2) {
-		j j1 = new j(arg0.abl(arg1 + ".dat", null));
-		j j2 = new j(arg0.abl("index.dat", null));
+	public h(Archive arg0, String name, int arg2) {
+		RSBuffer j1 = new RSBuffer(arg0.abl(name + ".dat", null));
+		RSBuffer j2 = new RSBuffer(arg0.abl("index.dat", null));
 		j2.ala = j1.aik();
 		agg = j2.aik();
 		agh = j2.aik();

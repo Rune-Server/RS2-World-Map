@@ -11,7 +11,7 @@ public class MapView extends RSAppet {
 
 	public static final void main(String arg0[]) {
 		MapView mapview1 = new MapView();
-		mapview1.createFrame(635, 503);
+		mapview1.createFrame(635, 507);
 	}
 
 	public final void aab() {
@@ -22,10 +22,10 @@ public class MapView extends RSAppet {
 	/**
 	 * Startup
 	 */
-	public final void aga() {
-		o o1 = abb();
+	public final void startup() {
+		Archive o1 = abb();
 		drawLoadingText(100, "Please wait... Rendering Map");
-		j j1 = new j(o1.abl("size.dat", null));
+		RSBuffer j1 = new RSBuffer(o1.abl("size.dat", null));
 		aaj = j1.aik();
 		aak = j1.aik();
 		aal = j1.aik();
@@ -36,7 +36,7 @@ public class MapView extends RSAppet {
 		mapXOffset = (aal * mapYOffset) / aam;
 		mapX = 635 - mapXOffset - 5;
 		mapY = 503 - mapYOffset - 20;
-		j1 = new j(o1.abl("labels.dat", null));
+		j1 = new RSBuffer(o1.abl("labels.dat", null));
 		aef = j1.aik();
 		for (int k = 0; k < aef; k++) {
 			aeh[k] = j1.ail();
@@ -45,7 +45,7 @@ public class MapView extends RSAppet {
 			aek[k] = j1.aii();
 		}
 
-		j1 = new j(o1.abl("floorcol.dat", null));
+		j1 = new RSBuffer(o1.abl("floorcol.dat", null));
 		int i1 = j1.aik();
 		aan = new int[i1 + 1];
 		aba = new int[i1 + 1];
@@ -315,7 +315,7 @@ public class MapView extends RSAppet {
 		}
 	}
 
-	public final void ahd() {
+	public final void processLoop() {
 		if (super.keyPresses[1] == 1) {
 			aen = (int) ((double) aen - 16D / ael);
 			keyPressed = true;
@@ -397,10 +397,7 @@ public class MapView extends RSAppet {
 			if (super.mouseX > 166 && super.mouseX < 215 && super.mouseY > 449
 					&& super.mouseY < 476) {				
 				currentZoom = 3D;
-				aea = -1;
-				
-				
-				
+				aea = -1;				
 			}
 			// zoom 50%
 			if (super.mouseX > 226 && super.mouseX < 274 && super.mouseY > 449
@@ -448,12 +445,12 @@ public class MapView extends RSAppet {
 			ade = -1;
 			if (super.xDragged > keyX && super.xDragged < keyX + keyRX) {
 				int i1 = keyY + 21 + 5;
-				for (int i2 = 0; i2 < 25; i2++)
-					if (i2 + adb >= shopList.length || !shopList[i2 + adb].equals("???")) {
+				for (int shopIndex = 0; shopIndex < 25; shopIndex++)
+					if (shopIndex + adb >= shopList.length || !shopList[shopIndex + adb].equals("???")) {
 						if (super.yDragged >= i1 && super.yDragged < i1 + 17) {
-							ade = i2 + adb;
+							ade = shopIndex + adb;
 							if (super.clickType == 1) {
-								adg = i2 + adb;
+								adg = shopIndex + adb;
 								adh = 50;
 							}
 						}
@@ -1322,7 +1319,7 @@ public class MapView extends RSAppet {
 		}
 	}
 
-	private final o abb() {
+	private final Archive abb() {
 		byte abyte0[] = null;
 		String s = null;
 		try {
@@ -1331,7 +1328,7 @@ public class MapView extends RSAppet {
 			if (!abg(abyte0))
 				abyte0 = null;
 			if (abyte0 != null)
-				return new o(abyte0);
+				return new Archive(abyte0);
 		} catch (Throwable _ex) {
 		}
 		abyte0 = abc();
@@ -1340,7 +1337,7 @@ public class MapView extends RSAppet {
 				abf(s + "/worldmap.dat", abyte0);
 			} catch (Throwable _ex) {
 			}
-		return new o(abyte0);
+		return new Archive(abyte0);
 	}
 
 	private final byte[] abc() {

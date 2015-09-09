@@ -10,13 +10,12 @@ public final class Window extends Frame {
 	RSAppet canvas;
 	
 	public Window(RSAppet canvas, int width, int height) {
-		int heightOffset = 2;
 		this.canvas = canvas;
-		setTitle("RS2 World Map Viewer");
-		setResizable(false);
-		show();
-		toFront();
-		resize(width + 8, height + heightOffset);
+		this.setTitle("RS2 World Map Viewer");
+		this.setResizable(false);
+		this.toFront();
+		this.setSize(new Dimension(width, height));
+		this.setVisible(true);
 	}
 
 	public final void adj(Graphics g) {

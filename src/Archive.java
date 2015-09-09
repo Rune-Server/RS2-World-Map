@@ -1,21 +1,21 @@
-public final class o {
+public final class Archive {
 
-	public o(byte arg0[]) {
-		abk(arg0);
+	public Archive(byte data[]) {
+		decodeData(data);
 	}
 
-	private void abk(byte arg0[]) {
-		j j1 = new j(arg0);
+	private void decodeData(byte data[]) {
+		RSBuffer j1 = new RSBuffer(data);
 		int i = j1.aim();
 		int k = j1.aim();
 		if (k != i) {
 			byte abyte0[] = new byte[i];
-			m.aem(abyte0, i, arg0, k, 6);
+			m.aem(abyte0, i, data, k, 6);
 			afc = abyte0;
-			j1 = new j(afc);
+			j1 = new RSBuffer(afc);
 			afi = true;
 		} else {
-			afc = arg0;
+			afc = data;
 			afi = false;
 		}
 		afd = j1.aik();
