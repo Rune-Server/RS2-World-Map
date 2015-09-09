@@ -78,15 +78,15 @@ public class MapView extends RSAppet {
 
 		} catch (Exception _ex) {
 		}
-		abj = new i(o1, "b12_full", false);
-		abk = new f(11, true, this);
-		abl = new f(12, true, this);
-		abm = new f(14, true, this);
-		abn = new f(17, true, this);
-		aca = new f(19, true, this);
-		acb = new f(22, true, this);
-		acc = new f(26, true, this);
-		acd = new f(30, true, this);
+		abj = new TextDrawingArea(o1, "b12_full", false);
+		abk = new RSFont(11, true, this);
+		abl = new RSFont(12, true, this);
+		abm = new RSFont(14, true, this);
+		abn = new RSFont(17, true, this);
+		aca = new RSFont(19, true, this);
+		acb = new RSFont(22, true, this);
+		acc = new RSFont(26, true, this);
+		acd = new RSFont(30, true, this);
 		abb = new int[aal][aam];
 		aag(abyte1, abb);
 		adn = new Sprite(mapXOffset, mapYOffset);
@@ -775,7 +775,7 @@ public class MapView extends RSAppet {
 				int i7 = arg5 + ((arg7 - arg5) * (k5 - arg1)) / (arg3 - arg1);
 				int i8 = aek[j4];
 				int i9 = 0xffffff;
-				f f1 = null;
+				RSFont f1 = null;
 				if (i8 == 0) {
 					if (ael == 3D)
 						f1 = abk;
@@ -1495,15 +1495,15 @@ public class MapView extends RSAppet {
 	private byte abg[][];
 	private h abh[];
 	private Sprite abi[];
-	private i abj;
-	private f abk;
-	private f abl;
-	private f abm;
-	private f abn;
-	private f aca;
-	private f acb;
-	private f acc;
-	private f acd;
+	private TextDrawingArea abj;
+	private RSFont abk;
+	private RSFont abl;
+	private RSFont abm;
+	private RSFont abn;
+	private RSFont aca;
+	private RSFont acb;
+	private RSFont acc;
+	private RSFont acd;
 	private int ace[];
 	private int acf[];
 	private int acg[];

@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public final class i extends DrawingArea {
+public final class TextDrawingArea extends DrawingArea {
 	
 	byte ahk[][];
 	int ahl[];
@@ -34,7 +34,7 @@ public final class i extends DrawingArea {
 		}
 	}
 
-	public i(Archive arg0, String arg1, boolean arg2) {
+	public TextDrawingArea(Archive arg0, String arg1, boolean arg2) {
 		ahk = new byte[256][];
 		ahl = new int[256];
 		ahm = new int[256];
