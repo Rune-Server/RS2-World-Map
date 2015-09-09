@@ -15,7 +15,7 @@ public class MapView extends RSAppet {
 	}
 
 	public final void aab() {
-		agj(635, 503);
+		initializeFrame(635, 503);
 	}
 
 
@@ -316,24 +316,24 @@ public class MapView extends RSAppet {
 	}
 
 	public final void ahd() {
-		if (super.ake[1] == 1) {
+		if (super.keyPresses[1] == 1) {
 			aen = (int) ((double) aen - 16D / ael);
 			keyPressed = true;
 		}
-		if (super.ake[2] == 1) {
+		if (super.keyPresses[2] == 1) {
 			aen = (int) ((double) aen + 16D / ael);
 			keyPressed = true;
 		}
-		if (super.ake[3] == 1) {
+		if (super.keyPresses[3] == 1) {
 			afa = (int) ((double) afa - 16D / ael);
 			keyPressed = true;
 		}
-		if (super.ake[4] == 1) {
+		if (super.keyPresses[4] == 1) {
 			afa = (int) ((double) afa + 16D / ael);
 			keyPressed = true;
 		}
 		for (int key = 1; key > 0;) {
-			key = agd();
+			key = nextClick();
 			if (key == 49) {
 				currentZoom = 3D;
 				keyPressed = true;
@@ -358,7 +358,7 @@ public class MapView extends RSAppet {
 				showMapInterface = !showMapInterface;
 				keyPressed = true;
 			}
-			if (super.ajd != null && key == 101) {
+			if (super.rsFrame != null && key == 101) {
 				System.out.println("Starting export...");
 				Sprite g1 = new Sprite(aal * 2, aam * 2);
 				g1.acf();
@@ -388,7 +388,7 @@ public class MapView extends RSAppet {
 			}
 		}
 
-		if (super.aka == 1) {
+		if (super.clickType == 1) {
 			aea = super.mouseX;
 			aeb = super.mouseY;
 			aec = aen;
@@ -446,13 +446,13 @@ public class MapView extends RSAppet {
 		}
 		if (showKeyInterface) {
 			ade = -1;
-			if (super.aji > keyX && super.aji < keyX + keyRX) {
+			if (super.xDragged > keyX && super.xDragged < keyX + keyRX) {
 				int i1 = keyY + 21 + 5;
 				for (int i2 = 0; i2 < 25; i2++)
 					if (i2 + adb >= shopList.length || !shopList[i2 + adb].equals("???")) {
-						if (super.ajj >= i1 && super.ajj < i1 + 17) {
+						if (super.yDragged >= i1 && super.yDragged < i1 + 17) {
 							ade = i2 + adb;
-							if (super.aka == 1) {
+							if (super.clickType == 1) {
 								adg = i2 + adb;
 								adh = 50;
 							}
@@ -466,12 +466,12 @@ public class MapView extends RSAppet {
 				keyPressed = true;
 			}
 		}
-		if ((super.ajh == 1 || super.aka == 1) && showMapInterface) {
+		if ((super.clickMode2 == 1 || super.clickType == 1) && showMapInterface) {
 			int x = super.mouseX;
 			int y = super.mouseY;
-			if (super.ajh == 1) {
-				x = super.aji;
-				y = super.ajj;
+			if (super.clickMode2 == 1) {
+				x = super.xDragged;
+				y = super.yDragged;
 			}
 			if (x > mapX && y > mapY && x < mapX + mapXOffset && y < mapY + mapYOffset) {
 				aen = ((x - mapX) * aal) / mapXOffset;
@@ -480,9 +480,9 @@ public class MapView extends RSAppet {
 				keyPressed = true;
 			}
 		}
-		if (super.ajh == 1 && aea != -1) {
-			aen = aec + (int) (((double) (aea - super.aji) * 2D) / currentZoom);
-			afa = aed + (int) (((double) (aeb - super.ajj) * 2D) / currentZoom);
+		if (super.clickMode2 == 1 && aea != -1) {
+			aen = aec + (int) (((double) (aea - super.xDragged) * 2D) / currentZoom);
+			afa = aed + (int) (((double) (aeb - super.yDragged) * 2D) / currentZoom);
 			keyPressed = true;
 		}
 		if (ael < currentZoom) {
@@ -1352,7 +1352,7 @@ public class MapView extends RSAppet {
 				s = s + p.agi[k];
 
 			DataInputStream datainputstream;
-			if (super.ajd != null)
+			if (super.rsFrame != null)
 				datainputstream = new DataInputStream(new FileInputStream(
 						"worldmap.jag"));
 			else

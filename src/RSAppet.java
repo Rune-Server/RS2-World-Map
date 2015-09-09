@@ -15,9 +15,6 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 			stopCounter = 4000 / delayTime;
 	}
 
-	public void afb() {
-	}
-
 	public void drawLoadingText(int progression, String text) {
 		while (graphics == null) {
 			graphics = getGameComponent().getGraphics();
@@ -34,10 +31,10 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 		FontMetrics fontmetrics = getGameComponent().getFontMetrics(font);
 		Font font1 = new Font("Helvetica", 0, 13);
 		FontMetrics fontmetrics1 = getGameComponent().getFontMetrics(font1);
-		if (aje) {
+		if (clearScreen) {
 			graphics.setColor(Color.black);
 			graphics.fillRect(0, 0, myWidth, myHeight);
-			aje = false;
+			clearScreen = false;
 		}
 		Color color = new Color(140, 17, 17);
 		int i = myHeight / 2 - 18;
@@ -52,14 +49,14 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 	}
 
 	public final void mouseReleased(MouseEvent event) {
-		ajg = 0;
-		ajh = 0;
+		idleTime = 0;
+		clickMode2 = 0;
 	}
 
-	public final void keyPressed(KeyEvent event) {
-		ajg = 0;
-		int keyCode = event.getKeyCode();
-		int keyIndex = event.getKeyChar();
+	public final void keyPressed(KeyEvent keyEvent) {
+		idleTime = 0;
+		int keyCode = keyEvent.getKeyCode();
+		int keyIndex = keyEvent.getKeyChar();
 		if (keyIndex < 30)
 			keyIndex = 0;
 		if (keyCode == 37) {
@@ -99,10 +96,10 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 		if (keyCode == 34)
 			keyIndex = 1003;
 		if (keyIndex > 0 && keyIndex < 128)
-			ake[keyIndex] = 1;
+			keyPresses[keyIndex] = 1;
 		if (keyIndex > 4) {
-			akf[akh] = keyIndex;
-			akh = akh + 1 & 0x7f;
+			charQueue[writeIndex] = keyIndex;
+			writeIndex = writeIndex + 1 & 0x7f;
 		}
 	}
 
@@ -119,7 +116,7 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 	public final void exit() {
 		stopCounter = -2;
 		cleanUpForQuit();
-		if (ajd != null) {
+		if (rsFrame != null) {
 			try {
 				Thread.sleep(1000L);
 			} catch (Exception exception) {
@@ -134,17 +131,16 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 	public final void update(Graphics g) {
 		if (graphics == null)
 			graphics = g;
-		aje = true;
-		afb();
+		clearScreen = true;
 	}
 
 	public final void mouseEntered(MouseEvent mouseevent) {
 	}
 
 	public final void mouseExited(MouseEvent arg0) {
-		ajg = 0;
-		aji = -1;
-		ajj = -1;
+		idleTime = 0;
+		xDragged = -1;
+		yDragged = -1;
 	}
 
 	public final void windowOpened(WindowEvent windowevent) {
@@ -167,27 +163,27 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 	public final void createFrame(int width, int height) {
 		myWidth = width;
 		myHeight = height;
-		ajd = new Window(this, myWidth, myHeight);
+		rsFrame = new Window(this, myWidth, myHeight);
 		graphics = getGameComponent().getGraphics();
 		fullScreen = new RSImageProducer(myWidth, myHeight, getGameComponent());
 		startRunnable(this, 1);
 	}
 
-	public final int agd() {
-		int i = -1;
-		if (akh != akg) {
-			i = akf[akg];
-			akg = akg + 1 & 0x7f;
+	public final int nextClick() {
+		int click = -1;
+		if (writeIndex != readIndex) {
+			click = charQueue[readIndex];
+			readIndex = readIndex + 1 & 0x7f;
 		}
-		return i;
+		return click;
 	}
 
 	public void age() {
 	}
 
 	public Component getGameComponent() {
-		if (ajd != null)
-			return ajd;
+		if (rsFrame != null)
+			return rsFrame;
 		else
 			return this;
 	}
@@ -198,7 +194,7 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 	public final void mousePressed(MouseEvent mouse) {
 		int x = mouse.getX();
 		int y = mouse.getY();
-		if (ajd != null) {
+		if (rsFrame != null) {
 			x -= 4;
 			y -= 22;
 		}
@@ -206,52 +202,52 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 		System.out.println("Mouse X: " + x);
 		System.out.println("Mouse Y: " + y);
 		
-		ajg = 0;
+		idleTime = 0;
 		localMouseX = x;
 		localMouseY = y;
-		ajn = System.currentTimeMillis();
+		clickTime = System.currentTimeMillis();
 		if (mouse.isMetaDown()) {
-			ajk = 2;
-			ajh = 2;
+			clickMode1 = 2;
+			clickMode2 = 2;
 		} else {
-			ajk = 1;
-			ajh = 1;
+			clickMode1 = 1;
+			clickMode2 = 1;
 		}
 	}
 
 	public final void mouseDragged(MouseEvent mouse) {
 		int x = mouse.getX();
 		int y = mouse.getY();
-		if (ajd != null) {
+		if (rsFrame != null) {
 			x -= 4;
 			y -= 22;
 		}
-		ajg = 0;
-		aji = x;
-		ajj = y;
+		idleTime = 0;
+		xDragged = x;
+		yDragged = y;
 	}
 
-	public final void agj(int arg0, int arg1) {
-		myWidth = arg0;
-		myHeight = arg1;
+	public final void initializeFrame(int width, int height) {
+		myWidth = width;
+		myHeight = height;
 		graphics = getGameComponent().getGraphics();
 		fullScreen = new RSImageProducer(myWidth, myHeight, getGameComponent());
 		startRunnable(this, 1);
 	}
 
-	public final void mouseMoved(MouseEvent arg0) {
-		int i = arg0.getX();
-		int j = arg0.getY();
-		if (ajd != null) {
-			i -= 4;
-			j -= 22;
+	public final void mouseMoved(MouseEvent mouseEvent) {
+		int xDragged = mouseEvent.getX();
+		int yDragged = mouseEvent.getY();
+		if (rsFrame != null) {
+			xDragged -= 4;
+			yDragged -= 22;
 		}
-		ajg = 0;
-		aji = i;
-		ajj = j;
+		idleTime = 0;
+		this.xDragged = xDragged;
+		this.yDragged = yDragged;
 	}
 
-	public final void keyTyped(KeyEvent keyevent) {
+	public final void keyTyped(KeyEvent keyEvent) {
 	}
 
 	public final void windowDeactivated(WindowEvent windowevent) {
@@ -260,8 +256,7 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 	public final void agn(Graphics g) {
 		if (graphics == null)
 			graphics = g;
-		aje = true;
-		afb();
+		clearScreen = true;
 	}
 
 	public final void destroy() {
@@ -280,67 +275,66 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 	public RSAppet() {
 		stopCounter = 0;
 		delayTime = 20;
-		aii = 1;
-		aij = new long[10];
-		aik = 0;
+		minDelay = 1;
+		aLong1 = new long[10];
+		framesPerSecond = 0;
 		ail = false;
 		ajc = new Sprite[6];
-		aje = true;
-		ajf = true;
-		ajg = 0;
-		ajh = 0;
-		aji = 0;
-		ajj = 0;
-		ajk = 0;
+		clearScreen = true;
+		awtFocus = true;
+		idleTime = 0;
+		clickMode2 = 0;
+		xDragged = 0;
+		yDragged = 0;
+		clickMode1 = 0;
 		localMouseX = 0;
 		localMouseY = 0;
-		ajn = 0L;
-		aka = 0;
+		clickTime = 0L;
+		clickType = 0;
 		mouseX = 0;
 		mouseY = 0;
-		akd = 0L;
-		ake = new int[128];
-		akf = new int[128];
-		akg = 0;
-		akh = 0;
+		clickHold = 0L;
+		keyPresses = new int[128];
+		charQueue = new int[128];
+		readIndex = 0;
+		writeIndex = 0;
 	}
 
 	public void ahd() {
 	}
 
-	public final void focusLost(FocusEvent arg0) {
-		ajf = false;
-		for (int i = 0; i < 128; i++)
-			ake[i] = 0;
-
+	public final void focusLost(FocusEvent event) {
+		awtFocus = false;
+		for (int index = 0; index < 128; index++)
+			keyPresses[index] = 0;
 	}
 
-	public final void keyReleased(KeyEvent arg0) {
-		ajg = 0;
-		int i = arg0.getKeyCode();
-		char c1 = arg0.getKeyChar();
-		if (c1 < '\036')
-			c1 = '\0';
+	public final void keyReleased(KeyEvent keyEvent) {
+		idleTime = 0;
+		int i = keyEvent.getKeyCode();
+		char c = keyEvent.getKeyChar();
+		if (c < '\036')
+			c = '\0';
 		if (i == 37)
-			c1 = '\001';
+			c = '\001';
 		if (i == 39)
-			c1 = '\002';
+			c = '\002';
 		if (i == 38)
-			c1 = '\003';
+			c = '\003';
 		if (i == 40)
-			c1 = '\004';
+			c = '\004';
 		if (i == 17)
-			c1 = '\005';
+			c = '\005';
 		if (i == 8)
-			c1 = '\b';
+			c = '\b';
 		if (i == 127)
-			c1 = '\b';
+			c = '\b';
 		if (i == 9)
-			c1 = '\t';
+			c = '\t';
 		if (i == 10)
-			c1 = '\n';
-		if (c1 > 0 && c1 < '\200')
-			ake[c1] = 0;
+			c = '\n';
+		if (c > 0 && c < '\200')
+			keyPresses[c] = 0;
 	}
 
 	public final void windowClosed(WindowEvent windowevent) {
@@ -351,17 +345,17 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 		getGameComponent().addMouseMotionListener(this);
 		getGameComponent().addKeyListener(this);
 		getGameComponent().addFocusListener(this);
-		if (ajd != null)
-			ajd.addWindowListener(this);
+		if (rsFrame != null)
+			rsFrame.addWindowListener(this);
 		drawLoadingText(0, "Loading...");
 		aga();
 		int i = 0;
-		int j = 256;
+		int fpsRatio = 256;
 		int k = 1;
-		int i1 = 0;
+		int fpsCount = 0;
 		int j1 = 0;
-		for (int k1 = 0; k1 < 10; k1++)
-			aij[k1] = System.currentTimeMillis();
+		for (int index = 0; index < 10; index++)
+			aLong1[index] = System.currentTimeMillis();
 
 		long l1 = System.currentTimeMillis();
 		while (stopCounter >= 0) {
@@ -372,64 +366,64 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 					return;
 				}
 			}
-			int i2 = j;
+			int i2 = fpsRatio;
 			int j2 = k;
-			j = 300;
+			fpsRatio = 300;
 			k = 1;
 			long l2 = System.currentTimeMillis();
-			if (aij[i] == 0L) {
-				j = i2;
+			if (aLong1[i] == 0L) {
+				fpsRatio = i2;
 				k = j2;
-			} else if (l2 > aij[i])
-				j = (int) ((long) (2560 * delayTime) / (l2 - aij[i]));
-			if (j < 25)
-				j = 25;
-			if (j > 256) {
-				j = 256;
-				k = (int) ((long) delayTime - (l2 - aij[i]) / 10L);
+			} else if (l2 > aLong1[i])
+				fpsRatio = (int) ((long) (2560 * delayTime) / (l2 - aLong1[i]));
+			if (fpsRatio < 25)
+				fpsRatio = 25;
+			if (fpsRatio > 256) {
+				fpsRatio = 256;
+				k = (int) ((long) delayTime - (l2 - aLong1[i]) / 10L);
 			}
 			if (k > delayTime)
 				k = delayTime;
-			aij[i] = l2;
+			aLong1[i] = l2;
 			i = (i + 1) % 10;
 			if (k > 1) {
 				for (int k2 = 0; k2 < 10; k2++)
-					if (aij[k2] != 0L)
-						aij[k2] += k;
+					if (aLong1[k2] != 0L)
+						aLong1[k2] += k;
 
 			}
-			if (k < aii)
-				k = aii;
+			if (k < minDelay)
+				k = minDelay;
 			try {
 				Thread.sleep(k);
 			} catch (InterruptedException interruptedexception) {
 				j1++;
 			}
-			for (; i1 < 256; i1 += j) {
-				aka = ajk;
+			for (; fpsCount < 256; fpsCount += fpsRatio) {
+				clickType = clickMode1;
 				mouseX = localMouseX;
 				mouseY = localMouseY;
-				akd = ajn;
-				ajk = 0;
+				clickHold = clickTime;
+				clickMode1 = 0;
 				ahd();
-				akg = akh;
+				readIndex = writeIndex;
 			}
 
-			i1 &= 0xff;
+			fpsCount &= 0xff;
 			if (delayTime > 0)
-				aik = (1000 * j) / (delayTime * 256);
+				framesPerSecond = (1000 * fpsRatio) / (delayTime * 256);
 			age();
 			if (ail) {
 				System.out.println("ntime:" + l2);
 				for (int i3 = 0; i3 < 10; i3++) {
 					int j3 = ((i - i3 - 1) + 20) % 10;
-					System.out.println("otim" + j3 + ":" + aij[j3]);
+					System.out.println("otim" + j3 + ":" + aLong1[j3]);
 				}
 
-				System.out.println("fps:" + aik + " ratio:" + j + " count:"
-						+ i1);
+				System.out.println("fps:" + framesPerSecond + " ratio:" + fpsRatio + " count:"
+						+ fpsCount);
 				System.out.println("del:" + k + " deltime:" + delayTime + " mindel:"
-						+ aii);
+						+ minDelay);
 				System.out.println("intex:" + j1 + " opos:" + i);
 				ail = false;
 				j1 = 0;
@@ -440,13 +434,8 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 	}
 
 	public final void focusGained(FocusEvent event) {
-		ajf = true;
-		aje = true;
-		
-		System.out.println("ajf: " + ajf);
-		System.out.println("aje" + aje);
-		
-		afb();
+		awtFocus = true;
+		clearScreen = true;		
 	}
 
 	public final void windowIconified(WindowEvent windowevent) {
@@ -454,33 +443,33 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 
 	private int stopCounter;
 	private int delayTime;
-	public int aii;
-	private long aij[];
-	public int aik;
+	public int minDelay;
+	private long aLong1[];
+	public int framesPerSecond;
 	public boolean ail;
 	public int myWidth;
 	public int myHeight;
 	public Graphics graphics;
 	public RSImageProducer fullScreen;
 	public Sprite ajc[];
-	public Window ajd;
-	public boolean aje;
-	public boolean ajf;
-	public int ajg;
-	public int ajh;
-	public int aji;
-	public int ajj;
-	public int ajk;
+	public Window rsFrame;
+	public boolean clearScreen;
+	public boolean awtFocus;
+	public int idleTime;
+	public int clickMode2;
+	public int xDragged;
+	public int yDragged;
+	public int clickMode1;
 	public int localMouseX;
 	public int localMouseY;
-	public long ajn;
-	public int aka;
+	public long clickTime;
+	public int clickType;
 	public int mouseX;
 	public int mouseY;
-	public long akd;
-	public int ake[];
-	private int akf[];
-	private int akg;
-	private int akh;
+	public long clickHold;
+	public int keyPresses[];
+	private int charQueue[];
+	private int readIndex;
+	private int writeIndex;
 	public static boolean aki;
 }
