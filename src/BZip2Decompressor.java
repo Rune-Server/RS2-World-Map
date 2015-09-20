@@ -1,4 +1,4 @@
-public final class m {
+public final class BZip2Decompressor {
 
 	private static byte aef(n arg0) {
 		return (byte) aen(8, arg0);

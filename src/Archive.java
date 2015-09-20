@@ -10,7 +10,7 @@ public final class Archive {
 		int k = j1.aim();
 		if (k != i) {
 			byte abyte0[] = new byte[i];
-			m.aem(abyte0, i, data, k, 6);
+			BZip2Decompressor.aem(abyte0, i, data, k, 6);
 			afc = abyte0;
 			j1 = new RSBuffer(afc);
 			afi = true;
@@ -45,7 +45,7 @@ public final class Archive {
 				if (arg1 == null)
 					arg1 = new byte[aff[l]];
 				if (!afi) {
-					m.aem(arg1, aff[l], afc, afg[l], afh[l]);
+					BZip2Decompressor.aem(arg1, aff[l], afc, afg[l], afh[l]);
 				} else {
 					for (int i1 = 0; i1 < aff[l]; i1++)
 						arg1[i1] = afc[afh[l] + i1];
