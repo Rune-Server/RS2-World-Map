@@ -1,17 +1,17 @@
 public final class BZip2Decompressor {
 
-	private static byte aef(n arg0) {
+	private static byte aef(BZip2DecompressionState arg0) {
 		return (byte) aen(8, arg0);
 	}
 
-	private static void aeg(n arg0) {
+	private static void aeg(BZip2DecompressionState arg0) {
 		int l8 = 0;
 		int ai[] = null;
 		int ai1[] = null;
 		int ai2[] = null;
 		arg0.ani = 1;
-		if (n.bad == null)
-			n.bad = new int[arg0.ani * 0x186a0];
+		if (BZip2DecompressionState.bad == null)
+			BZip2DecompressionState.bad = new int[arg0.ani * 0x186a0];
 		boolean flag20 = true;
 		while (flag20) {
 			byte data = aef(arg0);
@@ -194,7 +194,7 @@ public final class BZip2Decompressor {
 					byte byte5 = arg0.bah[arg0.bai[arg0.baj[0]] & 0xff];
 					arg0.ann[byte5 & 0xff] += k6;
 					for (; k6 > 0; k6--) {
-						n.bad[j6] = byte5 & 0xff;
+						BZip2DecompressionState.bad[j6] = byte5 & 0xff;
 						j6++;
 					}
 
@@ -246,7 +246,7 @@ public final class BZip2Decompressor {
 						}
 					}
 					arg0.ann[arg0.bah[byte6 & 0xff] & 0xff]++;
-					n.bad[j6] = arg0.bah[byte6 & 0xff] & 0xff;
+					BZip2DecompressionState.bad[j6] = arg0.bah[byte6 & 0xff] & 0xff;
 					j6++;
 					if (k5 == 0) {
 						j5++;
@@ -279,14 +279,14 @@ public final class BZip2Decompressor {
 				arg0.bab[l2] += arg0.bab[l2 - 1];
 
 			for (int i3 = 0; i3 < j6; i3++) {
-				byte byte7 = (byte) (n.bad[i3] & 0xff);
-				n.bad[arg0.bab[byte7 & 0xff]] |= i3 << 8;
+				byte byte7 = (byte) (BZip2DecompressionState.bad[i3] & 0xff);
+				BZip2DecompressionState.bad[arg0.bab[byte7 & 0xff]] |= i3 << 8;
 				arg0.bab[byte7 & 0xff]++;
 			}
 
-			arg0.anl = n.bad[arg0.ank] >> 8;
+			arg0.anl = BZip2DecompressionState.bad[arg0.ank] >> 8;
 			arg0.baa = 0;
-			arg0.anl = n.bad[arg0.anl];
+			arg0.anl = BZip2DecompressionState.bad[arg0.anl];
 			arg0.anm = (byte) (arg0.anl & 0xff);
 			arg0.anl >>= 8;
 			arg0.baa++;
@@ -299,12 +299,12 @@ public final class BZip2Decompressor {
 		}
 	}
 
-	private static void aeh(n arg0) {
+	private static void aeh(BZip2DecompressionState arg0) {
 		byte byte4 = arg0.and;
 		int i = arg0.ane;
 		int k = arg0.baa;
 		int l = arg0.anm;
-		int ai[] = n.bad;
+		int ai[] = BZip2DecompressionState.bad;
 		int i1 = arg0.anl;
 		byte abyte0[] = arg0.amm;
 		int j1 = arg0.amn;
@@ -403,14 +403,14 @@ public final class BZip2Decompressor {
 		arg0.ane = i;
 		arg0.baa = k;
 		arg0.anm = l;
-		n.bad = ai;
+		BZip2DecompressionState.bad = ai;
 		arg0.anl = i1;
 		arg0.amm = abyte0;
 		arg0.amn = j1;
 		arg0.ana = k1;
 	}
 
-	private static void aei(n arg0) {
+	private static void aei(BZip2DecompressionState arg0) {
 		arg0.bae = 0;
 		for (int i = 0; i < 256; i++)
 			if (arg0.baf[i]) {
@@ -420,7 +420,7 @@ public final class BZip2Decompressor {
 
 	}
 
-	private static byte aej(n arg0) {
+	private static byte aej(BZip2DecompressionState arg0) {
 		return (byte) aen(1, arg0);
 	}
 
@@ -482,7 +482,7 @@ public final class BZip2Decompressor {
 		}
 	}
 
-	private static int aen(int arg0, n arg1) {
+	private static int aen(int arg0, BZip2DecompressionState arg1) {
 		int i;
 		do {
 			if (arg1.anh >= arg0) {
@@ -502,6 +502,6 @@ public final class BZip2Decompressor {
 		return i;
 	}
 
-	private static n aif = new n();
+	private static BZip2DecompressionState aif = new BZip2DecompressionState();
 
 }

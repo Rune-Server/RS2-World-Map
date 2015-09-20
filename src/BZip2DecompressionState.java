@@ -1,6 +1,6 @@
-class n {
+class BZip2DecompressionState {
 
-	n() {
+	BZip2DecompressionState() {
 		ami = 0;
 		amn = 0;
 		ann = new int[256];
