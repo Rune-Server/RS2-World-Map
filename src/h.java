@@ -1,4 +1,4 @@
-public final class h extends DrawingArea {
+public final class h extends Raster {
 	
 	public byte aga[];
 	public int agb[];
@@ -66,31 +66,31 @@ public final class h extends DrawingArea {
 				i1 = (i2 - (agf * arg3) % i2 << 16) / arg3;
 			arg2 = (arg2 * (agc - (l >> 16))) / l1;
 			arg3 = (arg3 * (agd - (i1 >> 16))) / i2;
-			int j2 = arg0 + arg1 * DrawingArea.width;
-			int k2 = DrawingArea.width - arg2;
-			if (arg1 < DrawingArea.bbh) {
-				int l2 = DrawingArea.bbh - arg1;
+			int j2 = arg0 + arg1 * Raster.width;
+			int k2 = Raster.width - arg2;
+			if (arg1 < Raster.bbh) {
+				int l2 = Raster.bbh - arg1;
 				arg3 -= l2;
 				arg1 = 0;
-				j2 += l2 * DrawingArea.width;
+				j2 += l2 * Raster.width;
 				i1 += k1 * l2;
 			}
-			if (arg1 + arg3 > DrawingArea.bbi)
-				arg3 -= (arg1 + arg3) - DrawingArea.bbi;
-			if (arg0 < DrawingArea.bbj) {
-				int i3 = DrawingArea.bbj - arg0;
+			if (arg1 + arg3 > Raster.bbi)
+				arg3 -= (arg1 + arg3) - Raster.bbi;
+			if (arg0 < Raster.bbj) {
+				int i3 = Raster.bbj - arg0;
 				arg2 -= i3;
 				arg0 = 0;
 				j2 += i3;
 				l += j1 * i3;
 				k2 += i3;
 			}
-			if (arg0 + arg2 > DrawingArea.bbk) {
-				int j3 = (arg0 + arg2) - DrawingArea.bbk;
+			if (arg0 + arg2 > Raster.bbk) {
+				int j3 = (arg0 + arg2) - Raster.bbk;
 				arg2 -= j3;
 				k2 += j3;
 			}
-			acd(DrawingArea.pixels, aga, agb, l, i1, j2, k2, arg2, arg3, j1, k1, i);
+			acd(Raster.pixels, aga, agb, l, i1, j2, k2, arg2, arg3, j1, k1, i);
 		} catch (Exception exception) {
 			System.out.println("error in sprite clipping routine");
 		}

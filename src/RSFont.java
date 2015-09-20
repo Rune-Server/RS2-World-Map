@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.image.PixelGrabber;
 
-public class RSFont extends DrawingArea {
+public class RSFont extends Raster {
 
 	private void ahk(Font arg0, FontMetrics arg1, char arg2, int arg3,
 			boolean arg4, EventHandler arg5) {
@@ -173,11 +173,11 @@ public class RSFont extends DrawingArea {
 	public void ahn(String arg0, int arg1, int arg2, int arg3, boolean arg4) {
 		int i = aic(arg0) / 2;
 		int j = aig();
-		if (arg1 - i > DrawingArea.bbk)
+		if (arg1 - i > Raster.bbk)
 			return;
-		if (arg1 + i < DrawingArea.bbj)
+		if (arg1 + i < Raster.bbj)
 			return;
-		if (arg2 - j > DrawingArea.bbi)
+		if (arg2 - j > Raster.bbi)
 			return;
 		if (arg2 < 0) {
 			return;
@@ -239,38 +239,38 @@ public class RSFont extends DrawingArea {
 		int k = arg4[arg0 + 3];
 		int l = arg4[arg0 + 4];
 		int i1 = arg4[arg0] * 16384 + arg4[arg0 + 1] * 128 + arg4[arg0 + 2];
-		int j1 = i + j * DrawingArea.width;
-		int k1 = DrawingArea.width - k;
+		int j1 = i + j * Raster.width;
+		int k1 = Raster.width - k;
 		int l1 = 0;
-		if (j < DrawingArea.bbh) {
-			int i2 = DrawingArea.bbh - j;
+		if (j < Raster.bbh) {
+			int i2 = Raster.bbh - j;
 			l -= i2;
-			j = DrawingArea.bbh;
+			j = Raster.bbh;
 			i1 += i2 * k;
-			j1 += i2 * DrawingArea.width;
+			j1 += i2 * Raster.width;
 		}
-		if (j + l >= DrawingArea.bbi)
-			l -= ((j + l) - DrawingArea.bbi) + 1;
-		if (i < DrawingArea.bbj) {
-			int j2 = DrawingArea.bbj - i;
+		if (j + l >= Raster.bbi)
+			l -= ((j + l) - Raster.bbi) + 1;
+		if (i < Raster.bbj) {
+			int j2 = Raster.bbj - i;
 			k -= j2;
-			i = DrawingArea.bbj;
+			i = Raster.bbj;
 			i1 += j2;
 			j1 += j2;
 			l1 += j2;
 			k1 += j2;
 		}
-		if (i + k >= DrawingArea.bbk) {
-			int k2 = ((i + k) - DrawingArea.bbk) + 1;
+		if (i + k >= Raster.bbk) {
+			int k2 = ((i + k) - Raster.bbk) + 1;
 			k -= k2;
 			l1 += k2;
 			k1 += k2;
 		}
 		if (k > 0 && l > 0)
 			if (arg5)
-				aia(DrawingArea.pixels, arg4, arg3, i1, j1, k, l, k1, l1);
+				aia(Raster.pixels, arg4, arg3, i1, j1, k, l, k1, l1);
 			else
-				aif(DrawingArea.pixels, arg4, arg3, i1, j1, k, l, k1, l1);
+				aif(Raster.pixels, arg4, arg3, i1, j1, k, l, k1, l1);
 	}
 
 	private void aif(int arg0[], byte arg1[], int arg2, int arg3, int arg4,

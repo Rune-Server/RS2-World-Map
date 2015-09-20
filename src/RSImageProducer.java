@@ -11,7 +11,7 @@ public final class RSImageProducer implements ImageProducer, ImageObserver {
 	public Image image;
 	
 	public void initializeDrawingArea() {
-		DrawingArea.setArea(pixels, width, height);
+		Raster.setArea(pixels, width, height);
 	}
 
 	public RSImageProducer(int width, int height, Component component) {

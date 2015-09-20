@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public final class TextDrawingArea extends DrawingArea {
+public final class TextDrawingArea extends Raster {
 	
 	byte indexedPixels[][];
 	int widths[];
@@ -108,30 +108,30 @@ public final class TextDrawingArea extends DrawingArea {
 
 	private void aed(byte arg0[], int arg1, int arg2, int arg3, int arg4,
 			int arg5) {
-		int k = arg1 + arg2 * DrawingArea.width;
-		int l = DrawingArea.width - arg3;
+		int k = arg1 + arg2 * Raster.width;
+		int l = Raster.width - arg3;
 		int i1 = 0;
 		int j1 = 0;
-		if (arg2 < DrawingArea.bbh) {
-			int k1 = DrawingArea.bbh - arg2;
+		if (arg2 < Raster.bbh) {
+			int k1 = Raster.bbh - arg2;
 			arg4 -= k1;
-			arg2 = DrawingArea.bbh;
+			arg2 = Raster.bbh;
 			j1 += k1 * arg3;
-			k += k1 * DrawingArea.width;
+			k += k1 * Raster.width;
 		}
-		if (arg2 + arg4 >= DrawingArea.bbi)
-			arg4 -= ((arg2 + arg4) - DrawingArea.bbi) + 1;
-		if (arg1 < DrawingArea.bbj) {
-			int l1 = DrawingArea.bbj - arg1;
+		if (arg2 + arg4 >= Raster.bbi)
+			arg4 -= ((arg2 + arg4) - Raster.bbi) + 1;
+		if (arg1 < Raster.bbj) {
+			int l1 = Raster.bbj - arg1;
 			arg3 -= l1;
-			arg1 = DrawingArea.bbj;
+			arg1 = Raster.bbj;
 			j1 += l1;
 			k += l1;
 			i1 += l1;
 			l += l1;
 		}
-		if (arg1 + arg3 >= DrawingArea.bbk) {
-			int i2 = ((arg1 + arg3) - DrawingArea.bbk) + 1;
+		if (arg1 + arg3 >= Raster.bbk) {
+			int i2 = ((arg1 + arg3) - Raster.bbk) + 1;
 			arg3 -= i2;
 			i1 += i2;
 			l += i2;
@@ -139,7 +139,7 @@ public final class TextDrawingArea extends DrawingArea {
 		if (arg3 <= 0 || arg4 <= 0) {
 			return;
 		} else {
-			aee(DrawingArea.pixels, arg0, arg5, j1, k, arg3, arg4, l, i1);
+			aee(Raster.pixels, arg0, arg5, j1, k, arg3, arg4, l, i1);
 			return;
 		}
 	}

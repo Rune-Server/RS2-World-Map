@@ -1,4 +1,4 @@
-public final class Sprite extends DrawingArea {
+public final class Sprite extends Raster {
 
 	public int agk[];
 	public int agl;
@@ -9,38 +9,38 @@ public final class Sprite extends DrawingArea {
 	public int ahc;
 	
 	public void acf() {
-		DrawingArea.setArea(agk, agl, agm);
+		Raster.setArea(agk, agl, agm);
 	}
 
 	public void acg(int arg0, int arg1) {
 		arg0 += agn;
 		arg1 += aha;
-		int i = arg0 + arg1 * DrawingArea.width;
+		int i = arg0 + arg1 * Raster.width;
 		int k = 0;
 		int l = agm;
 		int i1 = agl;
-		int j1 = DrawingArea.width - i1;
+		int j1 = Raster.width - i1;
 		int k1 = 0;
-		if (arg1 < DrawingArea.bbh) {
-			int l1 = DrawingArea.bbh - arg1;
+		if (arg1 < Raster.bbh) {
+			int l1 = Raster.bbh - arg1;
 			l -= l1;
-			arg1 = DrawingArea.bbh;
+			arg1 = Raster.bbh;
 			k += l1 * i1;
-			i += l1 * DrawingArea.width;
+			i += l1 * Raster.width;
 		}
-		if (arg1 + l > DrawingArea.bbi)
-			l -= (arg1 + l) - DrawingArea.bbi;
-		if (arg0 < DrawingArea.bbj) {
-			int i2 = DrawingArea.bbj - arg0;
+		if (arg1 + l > Raster.bbi)
+			l -= (arg1 + l) - Raster.bbi;
+		if (arg0 < Raster.bbj) {
+			int i2 = Raster.bbj - arg0;
 			i1 -= i2;
-			arg0 = DrawingArea.bbj;
+			arg0 = Raster.bbj;
 			k += i2;
 			i += i2;
 			k1 += i2;
 			j1 += i2;
 		}
-		if (arg0 + i1 > DrawingArea.bbk) {
-			int j2 = (arg0 + i1) - DrawingArea.bbk;
+		if (arg0 + i1 > Raster.bbk) {
+			int j2 = (arg0 + i1) - Raster.bbk;
 			i1 -= j2;
 			k1 += j2;
 			j1 += j2;
@@ -48,7 +48,7 @@ public final class Sprite extends DrawingArea {
 		if (i1 <= 0 || l <= 0) {
 			return;
 		} else {
-			ach(DrawingArea.pixels, agk, 0, k, i, i1, l, j1, k1);
+			ach(Raster.pixels, agk, 0, k, i, i1, l, j1, k1);
 			return;
 		}
 	}
@@ -146,32 +146,32 @@ public final class Sprite extends DrawingArea {
 	public void ack(int arg0, int arg1) {
 		arg0 += agn;
 		arg1 += aha;
-		int i = arg0 + arg1 * DrawingArea.width;
+		int i = arg0 + arg1 * Raster.width;
 		int k = 0;
 		int l = agm;
 		int i1 = agl;
-		int j1 = DrawingArea.width - i1;
+		int j1 = Raster.width - i1;
 		int k1 = 0;
-		if (arg1 < DrawingArea.bbh) {
-			int l1 = DrawingArea.bbh - arg1;
+		if (arg1 < Raster.bbh) {
+			int l1 = Raster.bbh - arg1;
 			l -= l1;
-			arg1 = DrawingArea.bbh;
+			arg1 = Raster.bbh;
 			k += l1 * i1;
-			i += l1 * DrawingArea.width;
+			i += l1 * Raster.width;
 		}
-		if (arg1 + l > DrawingArea.bbi)
-			l -= (arg1 + l) - DrawingArea.bbi;
-		if (arg0 < DrawingArea.bbj) {
-			int i2 = DrawingArea.bbj - arg0;
+		if (arg1 + l > Raster.bbi)
+			l -= (arg1 + l) - Raster.bbi;
+		if (arg0 < Raster.bbj) {
+			int i2 = Raster.bbj - arg0;
 			i1 -= i2;
-			arg0 = DrawingArea.bbj;
+			arg0 = Raster.bbj;
 			k += i2;
 			i += i2;
 			k1 += i2;
 			j1 += i2;
 		}
-		if (arg0 + i1 > DrawingArea.bbk) {
-			int j2 = (arg0 + i1) - DrawingArea.bbk;
+		if (arg0 + i1 > Raster.bbk) {
+			int j2 = (arg0 + i1) - Raster.bbk;
 			i1 -= j2;
 			k1 += j2;
 			j1 += j2;
@@ -179,7 +179,7 @@ public final class Sprite extends DrawingArea {
 		if (i1 <= 0 || l <= 0) {
 			return;
 		} else {
-			acl(DrawingArea.pixels, agk, k, i, i1, l, j1, k1);
+			acl(Raster.pixels, agk, k, i, i1, l, j1, k1);
 			return;
 		}
 	}
