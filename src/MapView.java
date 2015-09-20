@@ -1345,7 +1345,7 @@ public class MapView extends EventHandler {
 		try {
 			String s = "";
 			for (int k = 0; k < 10; k++)
-				s = s + p.agi[k];
+				s = s + ArchiveHash.archiveHash[k];
 
 			DataInputStream datainputstream;
 			if (super.rsFrame != null)
@@ -1431,7 +1431,7 @@ public class MapView extends EventHandler {
 		messagedigest.update(arg0);
 		byte abyte0[] = messagedigest.digest();
 		for (int k = 0; k < 20; k++)
-			if (abyte0[k] != p.agi[k])
+			if (abyte0[k] != ArchiveHash.archiveHash[k])
 				return false;
 
 		return true;
