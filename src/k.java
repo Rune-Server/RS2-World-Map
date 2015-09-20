@@ -1,10 +1,10 @@
 public final class k {
 
 	public k() {
-		afk = new c();
-		afk.afl = afk;
-		afk.afm = afk;
+		afk = new Linkable();
+		afk.next = afk;
+		afk.previous = afk;
 	}
 
-	public c afk;
+	public Linkable afk;
 }
