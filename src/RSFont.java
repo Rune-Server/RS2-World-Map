@@ -4,7 +4,7 @@ import java.awt.image.PixelGrabber;
 public class RSFont extends DrawingArea {
 
 	private void ahk(Font arg0, FontMetrics arg1, char arg2, int arg3,
-			boolean arg4, RSAppet arg5) {
+			boolean arg4, EventHandler arg5) {
 		int i = arg1.charWidth(arg2);
 		int j = i;
 		if (arg4)
@@ -127,7 +127,7 @@ public class RSFont extends DrawingArea {
 		}
 	}
 
-	public RSFont(int arg0, boolean arg1, RSAppet arg2) {
+	public RSFont(int arg0, boolean arg1, EventHandler arg2) {
 		akj = false;
 		akk = 0;
 		akl = new byte[0x186a0];

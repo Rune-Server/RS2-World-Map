@@ -7,9 +7,9 @@ public final class Window extends Frame {
 	 */
 	private static final long serialVersionUID = 5287663274925283481L;
 
-	RSAppet canvas;
+	EventHandler canvas;
 	
-	public Window(RSAppet canvas, int width, int height) {
+	public Window(EventHandler canvas, int width, int height) {
 		this.canvas = canvas;
 		this.setTitle("RS2 World Map Viewer");
 		this.setResizable(false);

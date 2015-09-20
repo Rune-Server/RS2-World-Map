@@ -2,11 +2,11 @@ import java.io.*;
 import java.net.URL;
 import java.security.MessageDigest;
 
-public class MapView extends RSAppet {
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
-	/**
-	 * 
-	 */
+public class MapView extends EventHandler {
+
 	private static final long serialVersionUID = 1L;
 
 	public static final void main(String arg0[]) {
@@ -17,7 +17,6 @@ public class MapView extends RSAppet {
 	public final void aab() {
 		initializeFrame(635, 503);
 	}
-
 
 	/**
 	 * Startup
@@ -350,11 +349,11 @@ public class MapView extends RSAppet {
 				currentZoom = 8D;
 				keyPressed = true;
 			}
-			if (key == 107 || key == Constants.K) {
+			if (key == 107 || key == 75 ) {
 				showKeyInterface = !showKeyInterface;
 				keyPressed = true;
 			}
-			if (key == 111 || key == Constants.O) {
+			if (key == 111 || key == 79) {
 				showMapInterface = !showMapInterface;
 				keyPressed = true;
 			}

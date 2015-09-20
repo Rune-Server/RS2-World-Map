@@ -2,7 +2,7 @@ import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.*;
 
-public class RSAppet extends Applet implements Runnable, MouseListener,
+public class EventHandler extends Applet implements Runnable, MouseListener,
 		MouseMotionListener, KeyListener, FocusListener, WindowListener {
 
 	/**
@@ -272,7 +272,7 @@ public class RSAppet extends Applet implements Runnable, MouseListener,
 	public void cleanUpForQuit() {
 	}
 
-	public RSAppet() {
+	public EventHandler() {
 		stopCounter = 0;
 		delayTime = 20;
 		minDelay = 1;

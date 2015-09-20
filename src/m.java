@@ -14,33 +14,33 @@ public final class m {
 			n.bad = new int[arg0.ani * 0x186a0];
 		boolean flag20 = true;
 		while (flag20) {
-			byte byte0 = aef(arg0);
-			if (byte0 == 23)
+			byte data = aef(arg0);
+			if (data == 23)
 				return;
-			byte0 = aef(arg0);
-			byte0 = aef(arg0);
-			byte0 = aef(arg0);
-			byte0 = aef(arg0);
-			byte0 = aef(arg0);
+			data = aef(arg0);
+			data = aef(arg0);
+			data = aef(arg0);
+			data = aef(arg0);
+			data = aef(arg0);
 			arg0.anj++;
-			byte0 = aef(arg0);
-			byte0 = aef(arg0);
-			byte0 = aef(arg0);
-			byte0 = aef(arg0);
-			byte0 = aej(arg0);
-			if (byte0 != 0)
+			data = aef(arg0);
+			data = aef(arg0);
+			data = aef(arg0);
+			data = aef(arg0);
+			data = aej(arg0);
+			if (data != 0)
 				arg0.anf = true;
 			else
 				arg0.anf = false;
 			if (arg0.anf)
 				System.out.println("PANIC! RANDOMISED BLOCK!");
 			arg0.ank = 0;
-			byte0 = aef(arg0);
-			arg0.ank = arg0.ank << 8 | byte0 & 0xff;
-			byte0 = aef(arg0);
-			arg0.ank = arg0.ank << 8 | byte0 & 0xff;
-			byte0 = aef(arg0);
-			arg0.ank = arg0.ank << 8 | byte0 & 0xff;
+			data = aef(arg0);
+			arg0.ank = arg0.ank << 8 | data & 0xff;
+			data = aef(arg0);
+			arg0.ank = arg0.ank << 8 | data & 0xff;
+			data = aef(arg0);
+			arg0.ank = arg0.ank << 8 | data & 0xff;
 			for (int k = 0; k < 16; k++) {
 				byte byte1 = aej(arg0);
 				if (byte1 == 1)
