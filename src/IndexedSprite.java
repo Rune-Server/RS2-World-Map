@@ -1,24 +1,24 @@
-public final class h extends Raster {
+public final class IndexedSprite extends Raster {
 	
-	public byte aga[];
-	public int agb[];
-	public int agc;
-	public int agd;
-	public int age;
-	public int agf;
-	public int agg;
-	public int agh;
+	public byte raster[];
+	public int palette[];
+	public int width;
+	public int height;
+	public int drawOffsetX;
+	public int drawOffsetY;
+	public int resizeWidth;
+	public int resizeHeight;
 
-	public h(Archive arg0, String name, int arg2) {
+	public IndexedSprite(Archive arg0, String name, int arg2) {
 		RSBuffer j1 = new RSBuffer(arg0.abl(name + ".dat", null));
 		RSBuffer j2 = new RSBuffer(arg0.abl("index.dat", null));
 		j2.position = j1.getUShort();
-		agg = j2.getUShort();
-		agh = j2.getUShort();
+		resizeWidth = j2.getUShort();
+		resizeHeight = j2.getUShort();
 		int i = j2.aii();
-		agb = new int[i];
+		palette = new int[i];
 		for (int k = 0; k < i - 1; k++)
-			agb[k + 1] = j2.aim();
+			palette[k + 1] = j2.aim();
 
 		for (int l = 0; l < arg2; l++) {
 			j2.position += 2;
@@ -26,46 +26,46 @@ public final class h extends Raster {
 			j2.position++;
 		}
 
-		age = j2.aii();
-		agf = j2.aii();
-		agc = j2.getUShort();
-		agd = j2.getUShort();
+		drawOffsetX = j2.aii();
+		drawOffsetY = j2.aii();
+		width = j2.getUShort();
+		height = j2.getUShort();
 		int i1 = j2.aii();
-		int k1 = agc * agd;
-		aga = new byte[k1];
+		int k1 = width * height;
+		raster = new byte[k1];
 		if (i1 == 0) {
 			for (int l1 = 0; l1 < k1; l1++)
-				aga[l1] = j1.aij();
+				raster[l1] = j1.aij();
 
 		} else if (i1 == 1) {
-			for (int i2 = 0; i2 < agc; i2++) {
-				for (int k2 = 0; k2 < agd; k2++)
-					aga[i2 + k2 * agc] = j1.aij();
+			for (int i2 = 0; i2 < width; i2++) {
+				for (int k2 = 0; k2 < height; k2++)
+					raster[i2 + k2 * width] = j1.aij();
 
 			}
 		}
 	}
 
-	public void acc(int arg0, int arg1, int arg2, int arg3) {
+	public void clipSprite(int arg0, int arg1, int arg2, int arg3) {
 		try {
-			int i = agc;
-			int k = agd;
+			int i = width;
+			int k = height;
 			int l = 0;
 			int i1 = 0;
 			int j1 = (i << 16) / arg2;
 			int k1 = (k << 16) / arg3;
-			int l1 = agg;
-			int i2 = agh;
+			int l1 = resizeWidth;
+			int i2 = resizeHeight;
 			j1 = (l1 << 16) / arg2;
 			k1 = (i2 << 16) / arg3;
-			arg0 += ((age * arg2 + l1) - 1) / l1;
-			arg1 += ((agf * arg3 + i2) - 1) / i2;
-			if ((age * arg2) % l1 != 0)
-				l = (l1 - (age * arg2) % l1 << 16) / arg2;
-			if ((agf * arg3) % i2 != 0)
-				i1 = (i2 - (agf * arg3) % i2 << 16) / arg3;
-			arg2 = (arg2 * (agc - (l >> 16))) / l1;
-			arg3 = (arg3 * (agd - (i1 >> 16))) / i2;
+			arg0 += ((drawOffsetX * arg2 + l1) - 1) / l1;
+			arg1 += ((drawOffsetY * arg3 + i2) - 1) / i2;
+			if ((drawOffsetX * arg2) % l1 != 0)
+				l = (l1 - (drawOffsetX * arg2) % l1 << 16) / arg2;
+			if ((drawOffsetY * arg3) % i2 != 0)
+				i1 = (i2 - (drawOffsetY * arg3) % i2 << 16) / arg3;
+			arg2 = (arg2 * (width - (l >> 16))) / l1;
+			arg3 = (arg3 * (height - (i1 >> 16))) / i2;
 			int j2 = arg0 + arg1 * Raster.width;
 			int k2 = Raster.width - arg2;
 			if (arg1 < Raster.bbh) {
@@ -90,13 +90,13 @@ public final class h extends Raster {
 				arg2 -= j3;
 				k2 += j3;
 			}
-			acd(Raster.pixels, aga, agb, l, i1, j2, k2, arg2, arg3, j1, k1, i);
+			plotScale(Raster.pixels, raster, palette, l, i1, j2, k2, arg2, arg3, j1, k1, i);
 		} catch (Exception exception) {
 			System.out.println("error in sprite clipping routine");
 		}
 	}
 
-	private void acd(int arg0[], byte arg1[], int arg2[], int arg3, int arg4,
+	private void plotScale(int arg0[], byte arg1[], int arg2[], int arg3, int arg4,
 			int arg5, int arg6, int arg7, int arg8, int arg9, int arg10,
 			int arg11) {
 		try {

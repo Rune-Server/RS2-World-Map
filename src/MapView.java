@@ -67,7 +67,7 @@ public class MapView extends EventHandler {
 		aad(abyte3, abe, abg, abf);
 		try {
 			for (int l1 = 0; l1 < 100; l1++)
-				abh[l1] = new h(o1, "mapscene", l1);
+				abh[l1] = new IndexedSprite(o1, "mapscene", l1);
 
 		} catch (Exception _ex) {
 		}
@@ -734,7 +734,7 @@ public class MapView extends EventHandler {
 						}
 						int k11 = abyte2[l7 + arg1] & 0xff;
 						if (k11 != 0)
-							abh[k11 - 1].acc(j3 - l4 / 2, l8 - j10 / 2, l4 * 2,
+							abh[k11 - 1].clipSprite(j3 - l4 / 2, l8 - j10 / 2, l4 * 2,
 									j10 * 2);
 						int j12 = abyte3[l7 + arg1] & 0xff;
 						if (j12 != 0) {
@@ -1445,7 +1445,7 @@ public class MapView extends EventHandler {
 		aaf = 0x990000;
 		aag = 0x880000;
 		keyPressed = true;
-		abh = new h[100];
+		abh = new IndexedSprite[100];
 		abi = new Sprite[100];
 		ace = new int[2000];
 		acf = new int[2000];
@@ -1492,7 +1492,7 @@ public class MapView extends EventHandler {
 	private byte abe[][];
 	private byte abf[][];
 	private byte abg[][];
-	private h abh[];
+	private IndexedSprite abh[];
 	private Sprite abi[];
 	private TextDrawingArea abj;
 	private RSFont abk;
