@@ -1,6 +1,6 @@
-public final class k {
+public final class Deque {
 
-	public k() {
+	public Deque() {
 		afk = new Linkable();
 		afk.next = afk;
 		afk.previous = afk;

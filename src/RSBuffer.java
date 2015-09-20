@@ -48,9 +48,9 @@ public final class RSBuffer extends d {
 	private static int ald = 0;
 	private static int ale = 0;
 	private static int alf = 0;
-	private static k alg = new k();
-	private static k alh = new k();
-	private static k ali = new k();
+	private static Deque alg = new Deque();
+	private static Deque alh = new Deque();
+	private static Deque ali = new Deque();
 	private static char alj[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
 			'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
 			'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
