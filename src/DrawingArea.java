@@ -1,4 +1,4 @@
-public class DrawingArea extends d {
+public class DrawingArea extends Cacheable {
 	
 	public static int pixels[];
 	public static int width;

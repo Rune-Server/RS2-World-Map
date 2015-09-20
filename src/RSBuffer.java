@@ -1,4 +1,4 @@
-public final class RSBuffer extends d {
+public final class RSBuffer extends Cacheable {
 
 	public int aih() {
 		position += 4;
